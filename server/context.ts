@@ -8,7 +8,7 @@ export interface Context {
 }
 
 export function createContext(request: Context) {
-  console.log(request)
+
   return {
     ...request,
     prisma,

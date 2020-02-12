@@ -3,7 +3,6 @@ datasource db {
   url      = "file:new.db"
   default  = true
 }
-
 generator client {
   provider = "prisma-client-js"
 }
