@@ -1,0 +1,26 @@
+query Rumors(
+  $skip:Int 
+  $first:Int 
+  $searchText:String   
+  $from:DateTime
+  $to:DateTime 
+){
+  
+  rumors(
+    first:$first
+    skip:$skip
+    where:{
+      recordAt:{gte:$from,lte:$to},
+      OR:[{
+        title:{contains:$searchText},
+        content:{contains:$searchText},
+        subTitle:{contains:$searchText},
+      }]
+    } orderBy:{recordAt:desc}){
+    id
+    title
+  	content
+    subTitle
+    recordAt
+  }
+}

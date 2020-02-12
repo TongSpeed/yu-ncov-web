@@ -1,0 +1,23 @@
+query Address($country:String="cn" $province:String="" $city:String=""){
+  countries{
+    id
+    title
+    cuid
+  }  
+  provinces(where:{country:{id:{equals:$country}}}){
+    id
+    title,
+    cuid  
+  }
+
+  cities(where:{province:{id:{equals:$province}}}){
+    id
+    title,  
+    cuid
+  }
+  areas(where:{city:{id:{equals:$city}}}){
+    id
+    title
+    cuid
+  }
+}

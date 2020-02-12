@@ -1,0 +1,40 @@
+query statByCity(
+  $orderBy:CityRecordOrderByInput={recordAt:desc}
+  $from:DateTime
+  $to:DateTime 
+  $province:String
+  $city:[String!] ){
+  cityRecords(
+    orderBy:$orderBy
+  
+    where:{
+      recordAt:{gte:$from,lte:$to},
+      city:{cuid:{in:$city}
+        NOT:{id:{contains:"�"}}
+        
+      }
+      province:{cuid:{equals:$province} NOT:{id:{contains:"�"}}}
+    }){
+      country{
+        title,
+        cuid
+        id
+      }
+    province{
+      id
+      cuid
+      title
+    }
+    city {
+      id
+      title
+      cuid
+    }
+    curedCount,
+    recordAt
+    deadCount
+    suspectedCount,
+    confirmedCount
+    
+  }
+}

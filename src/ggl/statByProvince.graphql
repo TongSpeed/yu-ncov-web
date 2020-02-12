@@ -1,0 +1,31 @@
+ query statByProvince(
+      $orderBy: ProvinceRecordOrderByInput = {
+      recordAt: desc}
+      $from: DateTime
+      $to: DateTime
+      $country:String
+      $province: [String!]) {
+  provinceRecords(
+    orderBy: $orderBy
+    where: {
+      recordAt: {gte: $from, lte: $to},
+      province: {cuid: {in: $province} NOT:{id:{contains:"�"}}}
+      country: {cuid:{equals:$country} NOT:{id:{contains:"�"}}}
+    }) {
+    country{
+        id
+        title
+        cuid
+      }
+    province {
+      id
+      title
+      cuid
+    }
+    curedCount
+    recordAt
+    deadCount
+    suspectedCount
+    confirmedCount
+  }
+}

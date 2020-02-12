@@ -1,0 +1,30 @@
+query news(
+  $skip:Int 
+  $first:Int 
+  $searchText:String   
+  $from:DateTime
+  $to:DateTime 
+  $province:String
+){
+  news(
+    first:$first
+    skip:$skip
+    where:{
+      recordAt:{gte:$from,lte:$to},
+       province:{equals:$province}
+      OR:[{
+        title:{contains:$searchText},
+        content:{contains:$searchText},
+        province:{contains:$searchText},
+    		infoSource:{contains:$searchText},
+      }]
+    } orderBy:{recordAt:desc}){
+    id
+    title
+  	content
+    province
+    sourceUrl
+    infoSource
+    recordAt
+  }
+}

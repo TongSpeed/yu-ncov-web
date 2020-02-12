@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+      "outDir": "lib",
+      "lib": ["esnext", "dom","ES2017","ES2018"],
+      "skipLibCheck": true,
+      "strict": true,
+      "esModuleInterop":true
+    },
+    "include": ["server/**/*"]
+  }

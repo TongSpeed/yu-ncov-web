@@ -1,0 +1,5 @@
+mutation create($data:InputVirusRecord!){
+  createVirusRecord(data:$data){
+    id,
+  }
+}

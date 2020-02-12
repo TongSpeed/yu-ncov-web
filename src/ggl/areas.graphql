@@ -1,0 +1,7 @@
+query Areas($city:String!){
+  areas(where:{city:{id:{equals:$city}}}){
+    id
+    title,
+    cuid  
+  }
+}
