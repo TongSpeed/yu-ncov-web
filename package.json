@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rimraf .next && next build",
     "generate:web": "graphql-codegen --config graphql-codegen.yml",
-    "start": "next start",
+    "start": "next start -p $PORT",
     "dev": "rimraf ./node_modules/.cache/babel-loader && cross-env NODE_ENV=development &&  next -p 2000",
     "reinstall": "rm -rf node_modules/ && yarn install",
     "test": "jest",
