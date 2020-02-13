@@ -79,45 +79,7 @@ const recordToDB = () => {
             )
         ))
     )
-   
-   /* return pipe(
-        ()=> photon.countries.findMany({include:{countryRecords:true}}),
-        Task.map(countries=> pipe(
-            countries,
-            A.map(a=>
-                pipe(
-                    a.countryRecords,
-                    toVirusRecords,
-                    a=>{
-                        console.log(a)
-                    }
-    
-                    
-                )
-                
-            )
-        ))
-    ) */
-   /*  if(a){
-        const countries=await photon.countries.findMany({include:{countryRecords:true}})
-        pipe(
-            countries,
-            A.map(a=>
-                pipe(
-                    a.countryRecords,
-                    toVirusRecords,
-                    a=>{
-                        console.log(a)
-                    }
-    
-                    
-                )
-                
-            )
-        )
-    }else{
-        photon.countries()
-    } */
+ 
   
    
 }

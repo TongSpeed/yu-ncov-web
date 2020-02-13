@@ -2,7 +2,7 @@ import { mutationType, stringArg } from 'nexus'
 import { passwordValid, token, hashPassword } from '../utils'
 export const Mutation = mutationType({
   definition(t) {
-    t.field('signup', {
+     t.field('signup', {
       type: 'AuthPayload',
       args: {
         name: stringArg(),

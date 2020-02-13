@@ -9,11 +9,11 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import appOption from '../data'
-import config from '../config.json'
 export let apolloClient: ApolloClient<NormalizedCacheObject> | null = null;
 export const initApolloClient =  (initialState = {}) => {
+    console.log(process.env.GRAPHQL_URL)
     const link = new HttpLink({
-            uri: "/api/graphql",
+            uri: "/api/graphl" ,
             credentials: 'same-origin',
            
         })

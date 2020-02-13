@@ -48,6 +48,11 @@ export type AuthPayload = {
   user: User,
 };
 
+export type BatchPayload = {
+   __typename?: 'BatchPayload',
+  count: Scalars['Int'],
+};
+
 export type City = {
    __typename?: 'City',
   areas: Array<Area>,
@@ -148,7 +153,9 @@ export type CityWhereInput = {
 };
 
 export type CityWhereUniqueInput = {
+  cuid?: Maybe<Scalars['String']>,
   id?: Maybe<Scalars['String']>,
+  title?: Maybe<Scalars['String']>,
 };
 
 export type Country = {
@@ -257,6 +264,7 @@ export type CountryWhereInput = {
 };
 
 export type CountryWhereUniqueInput = {
+  cuid?: Maybe<Scalars['String']>,
   id?: Maybe<Scalars['String']>,
   title?: Maybe<Scalars['String']>,
 };
@@ -286,8 +294,14 @@ export type IntFilter = {
 
 export type Mutation = {
    __typename?: 'Mutation',
+  deleteManyCity: BatchPayload,
   login: AuthPayload,
   signup: AuthPayload,
+};
+
+
+export type MutationDeleteManyCityArgs = {
+  where?: Maybe<CityWhereInput>
 };
 
 
@@ -602,12 +616,6 @@ export type QueryVirusInfoArgs = {
   where: VirusInfoWhereUniqueInput
 };
 
-export enum Role {
-  Admin = 'ADMIN',
-  User = 'USER',
-  Verified = 'VERIFIED'
-}
-
 export type Rumor = {
    __typename?: 'Rumor',
   content: Scalars['String'],
@@ -662,7 +670,7 @@ export type User = {
   id: Scalars['String'],
   name?: Maybe<Scalars['String']>,
   nickname: Scalars['String'],
-  role: Role,
+  role: Scalars['String'],
   updatedAt: Scalars['DateTime'],
 };
 

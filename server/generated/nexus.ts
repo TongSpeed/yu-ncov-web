@@ -99,7 +99,9 @@ export interface NexusGenInputs {
     title?: NexusGenInputs['StringFilter'] | null; // StringFilter
   }
   CityWhereUniqueInput: { // input type
+    cuid?: string | null; // String
     id?: string | null; // String
+    title?: string | null; // String
   }
   CountryRecordFilter: { // input type
     every?: NexusGenInputs['CountryRecordWhereInput'] | null; // CountryRecordWhereInput
@@ -162,6 +164,7 @@ export interface NexusGenInputs {
     title?: NexusGenInputs['StringFilter'] | null; // StringFilter
   }
   CountryWhereUniqueInput: { // input type
+    cuid?: string | null; // String
     id?: string | null; // String
     title?: string | null; // String
   }
@@ -345,7 +348,6 @@ export interface NexusGenInputs {
 
 export interface NexusGenEnums {
   OrderByArg: client.OrderByArg
-  Role: client.Role
 }
 
 export interface NexusGenRootTypes {
@@ -408,7 +410,6 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   VirusInfoWhereInput: NexusGenInputs['VirusInfoWhereInput'];
   VirusInfoWhereUniqueInput: NexusGenInputs['VirusInfoWhereUniqueInput'];
   OrderByArg: NexusGenEnums['OrderByArg'];
-  Role: NexusGenEnums['Role'];
 }
 
 export interface NexusGenFieldTypes {
@@ -539,7 +540,7 @@ export interface NexusGenFieldTypes {
     id: string; // String!
     name: string | null; // String
     nickname: string; // String!
-    role: NexusGenEnums['Role']; // Role!
+    role: string; // String!
     updatedAt: any; // DateTime!
   }
   VirusInfo: { // field return type
@@ -690,7 +691,7 @@ export type NexusGenObjectNames = "Area" | "AuthPayload" | "City" | "CityRecord"
 
 export type NexusGenInputNames = "AreaFilter" | "AreaOrderByInput" | "AreaWhereInput" | "CityFilter" | "CityOrderByInput" | "CityRecordFilter" | "CityRecordOrderByInput" | "CityRecordWhereInput" | "CityWhereInput" | "CityWhereUniqueInput" | "CountryRecordFilter" | "CountryRecordOrderByInput" | "CountryRecordWhereInput" | "CountryWhereInput" | "CountryWhereUniqueInput" | "DateTimeFilter" | "IntFilter" | "NewsOrderByInput" | "NewsWhereInput" | "NullableIntFilter" | "NullableStringFilter" | "ProvinceFilter" | "ProvinceOrderByInput" | "ProvinceRecordFilter" | "ProvinceRecordOrderByInput" | "ProvinceRecordWhereInput" | "ProvinceWhereInput" | "RumorOrderByInput" | "RumorWhereInput" | "StringFilter" | "VirusInfoWhereInput" | "VirusInfoWhereUniqueInput";
 
-export type NexusGenEnumNames = "OrderByArg" | "Role";
+export type NexusGenEnumNames = "OrderByArg";
 
 export type NexusGenInterfaceNames = never;
 

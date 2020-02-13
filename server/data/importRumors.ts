@@ -6,23 +6,9 @@ import { pipe } from 'fp-ts/lib/pipeable'
 import parse from 'csv-parse'
 import { createReadStream,ReadStream } from 'fs'
 import { join } from 'path'
-import {} from './'
-import { pick } from 'macoolka-object'
 const photon = new PrismaClient();
 
 import * as dateFns from 'date-fns';
-import { async } from 'rxjs/internal/scheduler/async'
-const getTodayBegin = (a: Date) => {
-    const cloneValue = new Date(a.toISOString())
-    const b = new Date(cloneValue.setHours(0, 0, 0, 0))
-    return b;
-}
-const getTodayEnd = (a: Date) => {
-    const cloneValue = new Date(a.toISOString())
-    const b = new Date(cloneValue.setHours(0, 0, 0, 0))
-    return dateFns.addDays(b, 1)
-
-}
 
 //const wstream = createWriteStream(join(__dirname, '..', 'data', 'test.json'))
 // Create the parser
@@ -61,7 +47,7 @@ interface InputRumor{
 }
 const RumorTask = ({id,title,subTitle,content,recordAt}: Rumor) => pipe(
     () => photon.rumor.upsert({
-        where: { title: title },
+        where: {  },
         create: {
             id,
             title,

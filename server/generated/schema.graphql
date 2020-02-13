@@ -128,7 +128,9 @@ input CityWhereInput {
 }
 
 input CityWhereUniqueInput {
+  cuid: String
   id: String
+  title: String
 }
 
 type Country {
@@ -226,6 +228,7 @@ input CountryWhereInput {
 }
 
 input CountryWhereUniqueInput {
+  cuid: String
   id: String
   title: String
 }
@@ -432,12 +435,6 @@ type Query {
   virusInfo(where: VirusInfoWhereUniqueInput!): VirusInfo
 }
 
-enum Role {
-  ADMIN
-  USER
-  VERIFIED
-}
-
 type Rumor {
   content: String!
   id: String!
@@ -490,7 +487,7 @@ type User {
   id: String!
   name: String
   nickname: String!
-  role: Role!
+  role: String!
   updatedAt: DateTime!
 }
 

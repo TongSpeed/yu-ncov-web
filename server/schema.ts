@@ -8,7 +8,7 @@ import {join} from 'path'
 //const { serverRuntimeConfig } = getConfig()
  const getPath = (fileName: string) =>
   join(process.cwd(),"server", "generated", fileName);
-
+console.log(getPath('schema.graphql'))
 export const schema = makeSchema({
   types,
   plugins: [nexusPrismaPlugin()],

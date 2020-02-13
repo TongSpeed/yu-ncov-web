@@ -9,7 +9,7 @@ import { join } from 'path'
 import * as dateFns from 'date-fns';
 import { formatJson } from 'macoolka-prettier'
 import { timer } from 'rxjs';
-
+const isWriteJson=false
 const timerUpdate=()=>{
 
      const interval=process.env.TIMER_INTERVAL?Number(process.env.TIMER_INTERVAL):10 * 60 * 1000
@@ -20,9 +20,16 @@ const timerUpdate=()=>{
         scrapeToRecord,
         Task.chainFirst((a) => async () => {
             logger.info(`get new data at ${dateFns.format(a.countries[0].recordAt, 'yyyy-MM-dd HH:mm')}`)
-            const name = join(__dirname, '..', '..','backup', 'data', filename(a.countries[0].recordAt))
-            writeFileSync(name, formatJson(a))
-            logger.info(`data save to ${name}`)
+            if(isWriteJson){
+               
+                const name = join(__dirname, '..', '..','backup', 'data', filename(a.countries[0].recordAt))
+                writeFileSync(name, formatJson(a))
+                logger.info(`data save to ${name}`)
+            }else{
+                return void 0;
+            }
+          
+
         }),
         Task.chain(a => toDB(a)),
         Task.map(() => logger.info(`data save to database`))

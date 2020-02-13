@@ -1,6 +1,0 @@
-query provinces($country:String!){
-  provinces(where:{country:{id:{equals:$country}}}){
-    id
-    title,  
-  }
-}

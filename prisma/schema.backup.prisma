@@ -1,0 +1,155 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://root:1@localhost:3306/yu_ncov_sql"
+}
+
+model Area {
+  cuid  String @default("")
+  id        String   @default(cuid()) @id
+  tags  String @default("")
+  title String @default("")
+  city  City
+}
+
+model City {
+  cuid        String       @default("")
+  id          String       @default(cuid()) @id
+  tags        String       @default("")
+  title       String       @default("")
+  province    Province
+  areas       Area[]
+  cityRecords CityRecord[] @relation(references: [city])
+}
+
+model CityRecord {
+  confirmedCount Int       @default(0)
+
+  curedCount     Int       @default(0)
+  deadCount      Int       @default(0)
+  recordAt       DateTime
+  sourceUrl      String
+  suspectedCount Int       @default(0)
+  
+  city           City
+  country        Country
+  province       Province
+  virus          VirusInfo
+  id        String   @default(cuid()) @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Country {
+  continents      String?
+  cuid            String           @default("")
+  id        String   @default(cuid()) @id
+  tags            String           @default("")
+  title           String           @default("")
+  cityRecords     CityRecord[]
+  countryRecords  CountryRecord[]  @relation(references: [country])
+  provinces       Province[]       @relation(references: [country])
+  provinceRecords ProvinceRecord[] @relation(references: [country])
+}
+
+model CountryRecord {
+  confirmedAddCount Int?
+  confirmedCount    Int       @default(0)
+  continents        String?
+  curedAddCount     Int?
+  curedCount        Int       @default(0)
+  deadAddCount      Int?
+  deadCount         Int       @default(0)
+
+  recordAt          DateTime
+  seriousAddCount   Int?
+  seriousCount      Int?
+  sourceUrl         String
+  suspectedAddCount Int?
+  suspectedCount    Int       @default(0)
+  country           Country
+  virus             VirusInfo
+
+
+  id        String   @default(cuid()) @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model News {
+  content    String
+  
+  infoSource String   @default("")
+  province   String   @default("")
+  recordAt   DateTime
+  sourceUrl  String
+  subTitle   String?
+  title      String
+  id        String   @default(cuid()) @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Province {
+  cuid            String           @default("")
+  id        String   @default(cuid()) @id
+  tags            String           @default("")
+  title           String           @default("")
+  country         Country
+  cities          City[]
+  cityRecords     CityRecord[]
+  provinceRecords ProvinceRecord[] @relation(references: [province])
+}
+
+model ProvinceRecord {
+  confirmedCount Int       @default(0)
+  curedCount     Int       @default(0)
+  deadCount      Int       @default(0)
+  recordAt       DateTime
+  sourceUrl      String    @default("")
+  suspectedCount Int       @default(0)
+  country        Country
+  province       Province
+  virus          VirusInfo
+
+  id        String   @default(cuid()) @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Rumor {
+  content   String
+  recordAt  DateTime
+  subTitle  String
+  title     String
+
+  id        String   @default(cuid()) @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  avatar    Boolean  @default(false)
+  email     String   @default("") @unique
+
+  name      String?
+  nickname  String   @default("")
+  password  String   @default("")
+  role      String   @default("USER")
+ 
+  id        String   @default(cuid()) @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VirusInfo {
+  description     String
+  id        String   @default(cuid()) @id
+  title           String           @default("")
+  cityRecords     CityRecord[]
+  countryRecords  CountryRecord[]
+  provinceRecords ProvinceRecord[]
+}

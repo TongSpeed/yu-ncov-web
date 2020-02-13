@@ -3,7 +3,7 @@ import Loading from 'macoolka-ui-components/lib/Loading'
 import Error from 'macoolka-ui-components/lib/Error'
 import { TComponent } from '../types'
 import InfiniteScroll from 'macoolka-ui-components/lib/InfiniteScroll'
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 const InfiniteScrollQuery: React.SFC<{
     model: TComponent<any>, 
     callback: (a: any) => React.ReactElement
@@ -58,7 +58,7 @@ const InfiniteScrollQuery: React.SFC<{
            
 
         }else  if (loading) {
-            return null
+            return <CircularProgress />
         }
     }else{
        return callback(value)
