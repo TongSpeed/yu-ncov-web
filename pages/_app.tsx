@@ -13,7 +13,7 @@ export let apolloClient: ApolloClient<NormalizedCacheObject> | null = null;
 export const initApolloClient =  (initialState = {}) => {
     console.log(process.env.GRAPHQL_URL)
     const link = new HttpLink({
-            uri: "/api/graphl" ,
+            uri: "https://yu-ncov.azurewebsites.net/api/graphl" ,
             credentials: 'same-origin',
            
         })
