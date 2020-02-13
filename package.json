@@ -23,7 +23,6 @@
     "migrate:save": " prisma2 migrate up --experimental"
   },
   "files": [
-    
     "lib",
     "LICENSE"
   ],
