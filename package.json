@@ -8,7 +8,7 @@
     "start:next": "next start -p $PORT",
     "generate:web": "graphql-codegen --config graphql-codegen.yml",
     "start:dev": "cross-env NODE_ENV=development  && next start -p 3000",
-    "start": "next start -p 3000",
+    "start": "next start -p $PORT",
     "dev": "rimraf ./node_modules/.cache/babel-loader && cross-env NODE_ENV=development PORT=3000 GRAPHQL_URL=http://localhost:3000/api/graphl &&  next -p $PORT",
     "reinstall": "rm -rf node_modules/ && yarn install",
     "test": "jest",
