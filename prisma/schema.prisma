@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = "mysql://ncov@yu-ncov-sql:jingyutong#1998@yu-ncov-sql.mysql.database.azure.com:3306/yu_ncov_sql"
+  provider = "sqlite"
+  url      = "file:./new.db"
 }
 
 model Area {

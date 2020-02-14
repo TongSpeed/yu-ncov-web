@@ -1,0 +1,66 @@
+{
+  "modules": {
+    "byIdentifier": {
+      "multi next-client-pages-loader?page=%2F_app&absolutePagePath=private-next-pages%2F_app.tsx! node_modules/next/dist/client/router.js": 0
+    },
+    "usedIds": {
+      "0": 0
+    }
+  },
+  "chunks": {
+    "byName": {
+      "29107295": 3,
+      "commons": 0,
+      "framework": 1,
+      "static/runtime/webpack.js": 2,
+      "4155b97837836251000338e8f7762b764c51ff03": 4,
+      "b18234005ce936a1692644c0076619827740ddce": 5,
+      "194d40f2": 6,
+      "b4f81986868d48b8ab8b5778c04f7f22f9052602": 7,
+      "18db713d61782e6b17514b15d43f438cb9518867": 8,
+      "f74e3492bb0804bbd2b109fe744006df8e5628c9": 9,
+      "static/icqQp2ZXbk3ZMTXcyDy4K/pages/_app.js": 10,
+      "static/icqQp2ZXbk3ZMTXcyDy4K/pages/_error.js": 11,
+      "static/icqQp2ZXbk3ZMTXcyDy4K/pages/city/[id].js": 12,
+      "static/icqQp2ZXbk3ZMTXcyDy4K/pages/country/[id].js": 13,
+      "static/icqQp2ZXbk3ZMTXcyDy4K/pages/index.js": 14,
+      "static/icqQp2ZXbk3ZMTXcyDy4K/pages/news.js": 15,
+      "static/icqQp2ZXbk3ZMTXcyDy4K/pages/province/[id].js": 16,
+      "static/icqQp2ZXbk3ZMTXcyDy4K/pages/provinces/[id].js": 17,
+      "static/icqQp2ZXbk3ZMTXcyDy4K/pages/rumor.js": 18,
+      "static/icqQp2ZXbk3ZMTXcyDy4K/pages/world.js": 19,
+      "static/runtime/main.js": 20,
+      "static/runtime/polyfills.js": 21
+    },
+    "bySource": {
+      "0 node_modules/next/dist/build/webpack/loaders/next-babel-loader.js??ref--4!pages/_app.tsx @apollo/react-ssr": 1,
+      "1 node_modules/next/dist/build/webpack/loaders/next-babel-loader.js??ref--4!pages/_app.tsx @apollo/react-ssr": 5,
+      "2 node_modules/next/dist/build/webpack/loaders/next-babel-loader.js??ref--4!pages/_app.tsx @apollo/react-ssr": 22
+    },
+    "usedIds": [
+      0,
+      1,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      2,
+      20,
+      21,
+      22,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  }
+}

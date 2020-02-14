@@ -196,7 +196,7 @@ const recordToDB = (data: NCOVRecord, sourceUrl = 'https://ncov.dxy.cn/ncovh5/vi
 
                 const id = value.length > 0 ? value[0].id : undefined;
                 if (id) {
-
+                   
                     const update: Task.Task<any> = () => (value[0].recordAt < current.recordAt) ? photon.countryRecord.update({
                         where: { id: id },
                         data: {

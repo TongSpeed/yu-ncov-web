@@ -1,4 +1,3 @@
-import 'isomorphic-fetch';
 import React from 'react';
 import App, { AppContext } from 'next/app';
 import Root from '../src/app/App'
@@ -9,13 +8,16 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import appOption from '../data'
+
+import fetch from 'isomorphic-unfetch'
+
 export let apolloClient: ApolloClient<NormalizedCacheObject> | null = null;
 export const initApolloClient =  (initialState = {}) => {
     console.log(process.env.GRAPHQL_URL)
     const link = new HttpLink({
-            uri: "https://yu-ncov.azurewebsites.net/api/graphl" ,
+            uri: "http://localhost:3000/api/graphql" ,
             credentials: 'same-origin',
-           
+            fetch,
         })
 
     const createApolloClient = (initialState = {}) => {

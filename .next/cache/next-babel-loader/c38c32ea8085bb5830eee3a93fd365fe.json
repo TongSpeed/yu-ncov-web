@@ -1,0 +1,1 @@
+{"ast":null,"code":"import React from \"react\";\nvar __jsx = React.createElement;\nimport ModelView from '../src/components/TView';\nimport rumors from '../src/virus/rumors';\nexport default (() => __jsx(ModelView, {\n  model: rumors({\n    first: 10\n  })\n}));","map":null,"metadata":{},"sourceType":"module"}

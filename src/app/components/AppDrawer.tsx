@@ -6,7 +6,7 @@ import { NavItem as NavItemInfo } from '../types'
 import { makeStyles } from '@material-ui/core/styles';
 import AppTitle from './AppTitle'
 import { parseStandProp } from 'macoolka-ui-core'
-import SideBar from 'macoolka-ui-components/lib/SideBar'
+import SideBar from './Sidebar'
 import { useAppStyle, useNavItems } from '../AppContext'
 //import { QueryCategories } from '../../schema/ggl'
 let savedScrollTop: undefined | number = undefined;
@@ -126,7 +126,7 @@ const AppDrawer: React.SFC<AppDrawerProp> = (props) => {
     const classes = useStyles();
     const navItems = useNavItems()
     return (
-        <SideBar open={isOpenExpandNav} handleDrawerToggle={() => toggleExpandNav({})} rtlActive={true}>
+        <SideBar open={isOpenExpandNav} handleDrawerToggle={() => toggleExpandNav({})} rtlActive={false}>
             <div className={classes.root}>
                 <AppTitle />
                 <Divider className={classes.divider} />

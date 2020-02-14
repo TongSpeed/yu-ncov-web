@@ -1,0 +1,1 @@
+{"ast":null,"code":"var __jsx = React.createElement;\nimport React from \"react\";\nimport MDX from 'react-markdown';\n\nconst ModelCard = ({\n  value\n}) => {\n  return __jsx(MDX, {\n    source: value\n  });\n};\n\nexport default ModelCard;","map":null,"metadata":{},"sourceType":"module"}

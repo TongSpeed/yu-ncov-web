@@ -14,13 +14,13 @@ import { useAppStyle, useAppInfo, useAppComponents, useAppResource } from './App
 import AppBar from './components/AppBar'
 import { create } from 'jss';
 import { registerServiceWorker, loadDependencies } from './helper'
-import rtl from 'jss-rtl';
+
 import { StylesProvider, jssPreset } from '@material-ui/styles';
 import FlexFlow from 'macoolka-ui-components/lib/FlexGrow'
 let dependenciesLoaded = false;
 // Configure JSS
 const jss = create({
-  plugins: [...jssPreset().plugins, rtl()],
+  plugins: [...jssPreset().plugins, ],
   insertionPoint: (process as any).browser ? document.querySelector('#insertion-point-jss') : undefined as any,
 });
 const AppFrame: React.SFC<{}> = ({ children, }) => {

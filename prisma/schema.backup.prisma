@@ -9,17 +9,17 @@ datasource db {
 
 model Area {
   cuid  String @default("")
-  id        String   @default(cuid()) @id
+  id    String @id
   tags  String @default("")
   title String @default("")
   city  City
 }
 
 model City {
-  cuid        String       @default("")
-  id          String       @default(cuid()) @id
+  cuid        String    @unique   @default("")
+  id          String       @id
   tags        String       @default("")
-  title       String       @default("")
+  title       String     @unique  @default("")
   province    Province
   areas       Area[]
   cityRecords CityRecord[] @relation(references: [city])
@@ -27,28 +27,27 @@ model City {
 
 model CityRecord {
   confirmedCount Int       @default(0)
-
   curedCount     Int       @default(0)
   deadCount      Int       @default(0)
   recordAt       DateTime
   sourceUrl      String
   suspectedCount Int       @default(0)
-  
   city           City
   country        Country
   province       Province
   virus          VirusInfo
+
   id        String   @default(cuid()) @id
+  updatedAt DateTime @default(now())
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 model Country {
   continents      String?
-  cuid            String           @default("")
-  id        String   @default(cuid()) @id
+  cuid            String       @unique    @default("")
+  id              String           @id
   tags            String           @default("")
-  title           String           @default("")
+  title           String       @unique    @default("")
   cityRecords     CityRecord[]
   countryRecords  CountryRecord[]  @relation(references: [country])
   provinces       Province[]       @relation(references: [country])
@@ -57,12 +56,13 @@ model Country {
 
 model CountryRecord {
   confirmedAddCount Int?
-  confirmedCount    Int       @default(0)
+  confirmedCount    Int     @default(0)
   continents        String?
-  curedAddCount     Int?
-  curedCount        Int       @default(0)
-  deadAddCount      Int?
-  deadCount         Int       @default(0)
+
+  curedAddCount Int?
+  curedCount    Int  @default(0)
+  deadAddCount  Int?
+  deadCount     Int  @default(0)
 
   recordAt          DateTime
   seriousAddCount   Int?
@@ -72,32 +72,30 @@ model CountryRecord {
   suspectedCount    Int       @default(0)
   country           Country
   virus             VirusInfo
-
-
-  id        String   @default(cuid()) @id
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                String    @default(cuid()) @id
+  updatedAt         DateTime  @default(now())
+  createdAt         DateTime  @default(now())
 }
 
 model News {
   content    String
-  
   infoSource String   @default("")
   province   String   @default("")
   recordAt   DateTime
-  sourceUrl  String
+  sourceUrl  String   @unique
   subTitle   String?
   title      String
+
   id        String   @default(cuid()) @id
+  updatedAt DateTime @default(now())
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 model Province {
   cuid            String           @default("")
-  id        String   @default(cuid()) @id
+  id              String           @id
   tags            String           @default("")
-  title           String           @default("")
+  title           String       @unique    @default("")
   country         Country
   cities          City[]
   cityRecords     CityRecord[]
@@ -105,50 +103,51 @@ model Province {
 }
 
 model ProvinceRecord {
-  confirmedCount Int       @default(0)
-  curedCount     Int       @default(0)
-  deadCount      Int       @default(0)
+  confirmedCount Int      @default(0)
+  curedCount     Int      @default(0)
+  deadCount      Int      @default(0)
   recordAt       DateTime
-  sourceUrl      String    @default("")
-  suspectedCount Int       @default(0)
-  country        Country
-  province       Province
-  virus          VirusInfo
+  sourceUrl      String   @default("")
+  suspectedCount Int      @default(0)
+
+  country  Country
+  province Province
+  virus    VirusInfo
 
   id        String   @default(cuid()) @id
+  updatedAt DateTime @default(now())
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 model Rumor {
   content   String
   recordAt  DateTime
   subTitle  String
-  title     String
-
+  title     String   @unique
   id        String   @default(cuid()) @id
+  updatedAt DateTime @default(now())
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 model User {
-  avatar    Boolean  @default(false)
-  email     String   @default("") @unique
+  avatar Boolean @default(false)
 
-  name      String?
-  nickname  String   @default("")
-  password  String   @default("")
-  role      String   @default("USER")
- 
+  email String @default("") @unique
+
+  name     String?
+  nickname String  @default("")
+  password String  @default("")
+  role     String  @default("USER")
+
   id        String   @default(cuid()) @id
+  updatedAt DateTime @default(now())
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 model VirusInfo {
   description     String
-  id        String   @default(cuid()) @id
-  title           String           @default("")
+  id              String           @id
+  title           String        @unique   @default("")
   cityRecords     CityRecord[]
   countryRecords  CountryRecord[]
   provinceRecords ProvinceRecord[]

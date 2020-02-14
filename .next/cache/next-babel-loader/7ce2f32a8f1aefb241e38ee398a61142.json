@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { esn } from 'macoolka-ui-core';\nexport default esn({\n  name: 'App.Body',\n  defaultProps: {},\n  tag: 'div',\n  style: () => ({\n    mkColor: 'background.default',\n    mkScrollBar: 'none',\n    textRendering: 'optimizeLegibility',\n    mkMinHeight: 'fullScreen',\n    display: 'flex'\n  })\n});","map":null,"metadata":{},"sourceType":"module"}

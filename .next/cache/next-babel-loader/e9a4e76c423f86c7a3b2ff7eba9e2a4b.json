@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { objectType } from 'nexus';\nexport const User = objectType({\n  name: 'User',\n\n  definition(t) {\n    t.model.id();\n    t.model.name();\n    t.model.email();\n    t.model.avatar();\n    t.model.nickname();\n    t.model.role();\n    t.model.createdAt();\n    t.model.updatedAt();\n  }\n\n});","map":null,"metadata":{},"sourceType":"module"}
