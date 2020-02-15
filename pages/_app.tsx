@@ -8,14 +8,13 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import appOption from '../data'
-import config from '../config.json'
 import fetch from 'isomorphic-unfetch'
 //const uri=process.env.GRAPHQL_URL ||"http://localhost:3000/api/graphql" 
 export let apolloClient: ApolloClient<NormalizedCacheObject> | null = null;
 export const initApolloClient =  (initialState = {}) => {
   
     const link = new HttpLink({
-            uri: config.uri ,
+            uri: "http://ncov.macoolka.com:4000",
             credentials: 'same-origin',
             fetch,
         })

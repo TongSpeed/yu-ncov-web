@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { objectType } from 'nexus';\nexport const AuthPayload = objectType({\n  name: 'AuthPayload',\n\n  definition(t) {\n    t.string('token');\n    t.field('user', {\n      type: 'User'\n    });\n  }\n\n});","map":null,"metadata":{},"sourceType":"module"}
