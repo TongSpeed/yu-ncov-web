@@ -1,1 +1,0 @@
-{"version":1,"basePath":"","redirects":[],"rewrites":[],"headers":[],"dynamicRoutes":[{"page":"/city/[id]","regex":"^\\/city\\/([^/]+?)(?:\\/)?$"},{"page":"/country/[id]","regex":"^\\/country\\/([^/]+?)(?:\\/)?$"},{"page":"/province/[id]","regex":"^\\/province\\/([^/]+?)(?:\\/)?$"},{"page":"/provinces/[id]","regex":"^\\/provinces\\/([^/]+?)(?:\\/)?$"}]}

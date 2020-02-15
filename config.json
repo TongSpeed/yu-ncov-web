@@ -1,6 +1,4 @@
 {
-    "uri":"http://192.168.0.8:4000",
-    "keys":{
-        "china":"ck6gr8hlb0000gh7c2a0f397x"
-    }
+    "uri":"http://localhost:3000/api/graphql"
+   
 }
