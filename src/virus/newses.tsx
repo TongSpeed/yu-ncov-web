@@ -1,9 +1,9 @@
 import { useNewsQuery, NewsQuery,NewsQueryVariables } from '../generated/hook/news.generated'
 import { TRow,TCard } from '../types'
-import { News, } from './types'
+import { NewsInput, } from './types'
 import { NewsModel } from './model'
 import newsCard from './newsCard'
-export const rumors = (variable: NewsQueryVariables): TRow<News[]> => ({
+export const rumors = (variable: NewsQueryVariables): TRow<NewsInput[]> => ({
     _type: 'row',
     model:NewsModel,
     query: {
@@ -25,7 +25,7 @@ export const rumors = (variable: NewsQueryVariables): TRow<News[]> => ({
         md: 12
     },
     isList:true,
-    transform: (as: NewsQuery['news']): News[] => {
+    transform: (as: NewsQuery['news']): NewsInput[] => {
         return as
        
     },

@@ -3,6 +3,7 @@ import React from "react";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
+import {useAppStyle} from '../AppContext'
 import { parseStandProp } from 'macoolka-ui-core'
 const useStyles = makeStyles((theme) => ({
     drawerPaper: () => ({
@@ -86,6 +87,7 @@ const useStyles = makeStyles((theme) => ({
 const Sidebar: React.SFC<{ rtlActive?: boolean, handleDrawerToggle: () => void, open: boolean }> =
     ({ rtlActive = false, open, children, handleDrawerToggle }) => {
         const classes = useStyles();
+        const {isOpenNav,toggleNav}=useAppStyle()
 
         return (
             <div>
@@ -94,13 +96,13 @@ const Sidebar: React.SFC<{ rtlActive?: boolean, handleDrawerToggle: () => void, 
                     <Drawer
                         variant="temporary"
                         anchor={rtlActive ? "left" : "right"}
-                        open={open}
+                        open={isOpenNav}
                         classes={{
                             paper: classNames(classes.drawerPaper, {
                                 [classes.drawerPaperRTL]: rtlActive
                             })
                         }}
-                        onClose={handleDrawerToggle}
+                        onClose={toggleNav}
                         ModalProps={{
                             keepMounted: true // Better open performance on mobile.
                         }}
@@ -113,7 +115,7 @@ const Sidebar: React.SFC<{ rtlActive?: boolean, handleDrawerToggle: () => void, 
                     <Drawer
                         anchor={rtlActive ? "left" : "right"}
                         variant="permanent"
-                        open={open}
+                        open={isOpenNav}
                         classes={{
                             paper: classNames(classes.drawerPaper, {
                                 [classes.drawerPaperRTL]: rtlActive

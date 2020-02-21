@@ -11,13 +11,13 @@ import {ColorProps} from '../types'
 const useStyles = makeStyles(styles as any);
 
 const CustomTable:React.SFC<{
-
+  media?:'xs'|'sm'|'lg'|'xl'
   tableHeaderColor: ColorProps|"gray"
   tableHead: Array<React.ReactNode>
   tableData: React.ReactNode[][]
 }>=(props)=> {
   const classes = useStyles();
-  const { tableHead, tableData, tableHeaderColor="gray" } = props;
+  const { tableHead, tableData, tableHeaderColor="gray" ,media} = props;
   return (
     <div className={classes.tableResponsive}>
       <Table className={classes.table}>

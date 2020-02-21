@@ -1,6 +1,5 @@
 import React from 'react';
 import { TFieldDisplay } from '../types'
-import Element from 'macoolka-ui-components/lib/Element'
 import { getTFieldValue } from '../helper/modelHelper'
 import {isString} from 'macoolka-predicate'
 import Mdx from './Mdx'

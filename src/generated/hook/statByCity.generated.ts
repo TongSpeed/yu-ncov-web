@@ -10,11 +10,8 @@ import * as ApolloReactHooks from '@apollo/react-hooks';
 
 
 export type StatByCityQueryVariables = {
-  orderBy?: Types.Maybe<Types.CityRecordOrderByInput>,
-  from?: Types.Maybe<Types.Scalars['DateTime']>,
-  to?: Types.Maybe<Types.Scalars['DateTime']>,
   province?: Types.Maybe<Types.Scalars['String']>,
-  city?: Types.Maybe<Array<Types.Scalars['String']>>
+  city?: Types.Maybe<Types.Scalars['String']>
 };
 
 
@@ -22,44 +19,52 @@ export type StatByCityQuery = (
   { __typename?: 'Query' }
   & { cityRecords: Array<(
     { __typename?: 'CityRecord' }
-    & Pick<Types.CityRecord, 'curedCount' | 'recordAt' | 'deadCount' | 'suspectedCount' | 'confirmedCount'>
-    & { country: (
-      { __typename?: 'Country' }
-      & Pick<Types.Country, 'title' | 'cuid' | 'id'>
-    ), province: (
-      { __typename?: 'Province' }
-      & Pick<Types.Province, 'id' | 'cuid' | 'title'>
-    ), city: (
+    & Pick<Types.CityRecord, 'id' | 'curedCount' | 'recordAt' | 'deadCount' | 'suspectedCount' | 'confirmedCount' | 'confirmedCountAdd' | 'curedCountAdd' | 'deadCountAdd' | 'suspectedCountAdd' | 'confirmedCountAddRate' | 'curedCountAddRate' | 'deadCountAddRate' | 'suspectedCountAddRate'>
+    & { city: (
       { __typename?: 'City' }
-      & Pick<Types.City, 'id' | 'title' | 'cuid'>
+      & Pick<Types.City, 'id' | 'title'>
+      & { province: (
+        { __typename?: 'Province' }
+        & Pick<Types.Province, 'id' | 'title'>
+        & { country: (
+          { __typename?: 'Country' }
+          & Pick<Types.Country, 'id' | 'title'>
+        ) }
+      ) }
     ) }
   )> }
 );
 
 
 export const StatByCityDocument = gql`
-    query statByCity($orderBy: CityRecordOrderByInput = {recordAt: desc}, $from: DateTime, $to: DateTime, $province: String, $city: [String!]) {
-  cityRecords(orderBy: $orderBy, where: {recordAt: {gte: $from, lte: $to}, city: {cuid: {in: $city}, NOT: {id: {contains: "�"}}}, province: {cuid: {equals: $province}, NOT: {id: {contains: "�"}}}}) {
-    country {
-      title
-      cuid
-      id
-    }
-    province {
-      id
-      cuid
-      title
-    }
+    query statByCity($province: String, $city: String) {
+  cityRecords(province: $province, city: $city) @client {
     city {
       id
       title
-      cuid
+      province {
+        id
+        title
+        country {
+          id
+          title
+        }
+      }
     }
+    id
     curedCount
     recordAt
     deadCount
     suspectedCount
     confirmedCount
+    confirmedCountAdd
+    curedCountAdd
+    deadCountAdd
+    suspectedCountAdd
+    confirmedCountAddRate
+    curedCountAddRate
+    deadCountAddRate
+    suspectedCountAddRate
   }
 }
     `;
@@ -76,9 +81,6 @@ export const StatByCityDocument = gql`
  * @example
  * const { data, loading, error } = useStatByCityQuery({
  *   variables: {
- *      orderBy: // value for 'orderBy'
- *      from: // value for 'from'
- *      to: // value for 'to'
  *      province: // value for 'province'
  *      city: // value for 'city'
  *   },

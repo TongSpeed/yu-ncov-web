@@ -31,7 +31,7 @@ export default () => {
                 edge="start"
                 color="inherit"
                 aria-label={openDrawer}
-                onClick={toggleNav}
+                onClick={()=>toggleNav()}
                 className={classes.navIconHide}
             >
                 <MenuIcon />

@@ -1,22 +1,25 @@
 query statByCountry(
-  $orderBy:CountryRecordOrderByInput={recordAt:desc}
-  $from:DateTime 
-  $to:DateTime ,
-  $country:[String!]){
-  countryRecords(orderBy:$orderBy
-    where:{recordAt:{gte:$from,lte:$to},
-      country:{cuid:{in:$country} NOT:{id:{contains:"�"}}}}){
+  $country:String){
+  countryRecords(country:$country) @client{
     country{
       id
       title
-      cuid
+      continents
     }
+    id
     curedCount,
     recordAt
     deadCount
     suspectedCount,
     confirmedCount,
-    continents
-    
+
+    confirmedCountAdd
+    curedCountAdd
+    deadCountAdd
+    suspectedCountAdd
+    confirmedCountAddRate
+    curedCountAddRate
+    deadCountAddRate
+    suspectedCountAddRate
   }
 }

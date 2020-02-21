@@ -31,6 +31,7 @@ const appData: AppOption = {
         name: 'Macoolka',
         logo:'/static/logo.png',
         email:"macoolka@gmail.com",
+        author:"版权所有:加速工作室@2020",
         href:"/",
     },
     style: {
@@ -84,17 +85,47 @@ const appData: AppOption = {
         href: '/rumor',
         icon: styledCommon(Dashboard),
     },{
-        id: 'hubei',
-        title: "湖北疫情",
-        href: '/province/[id]',
-        as:'/province/ck6gr8q4u001bgh7c8qgzfi4o',
-        icon: styledCommon(BubbleChart),
+        id: 'import',
+        title: "-",
+        href: '',
+        as:'',
+        icon: styledCommon(Notifications),
+    },{
+        id: 'dalian',
+        title: "大连疫情",
+        href: '/city/[id]',
+        as:'/city/ck6gr96li003dgh7c8vfphaab',
+        icon: styledCommon(Notifications),
     }, {
+        id: 'shengayng',
+        title: "沈阳疫情",
+        href: '/city/[id]',
+        as:'/city/ck6gr96e4003cgh7c6izd4uaz',
+        icon: styledCommon(Language),
+    },{
+        id: 'heerbing',
+        title: "哈尔滨疫情",
+        href: '/city/[id]',
+        as:' /city/ck6grb0yz00bagh7chn7x4ofi',
+        icon: styledCommon(Language),
+    },{
         id: 'liaoning',
         title: "辽宁疫情",
         href: '/province/[id]',
         as:'/province/ck6gr8lji000ugh7c9h38ey1g',
         icon: styledCommon(LocationOn),
+    },{
+        id: 'others',
+        title: "-",
+        href: '',
+        as:'',
+        icon: styledCommon(Notifications),
+    },{
+        id: 'hubei',
+        title: "湖北疫情",
+        href: '/province/[id]',
+        as:'/province/ck6gr8q4u001bgh7c8qgzfi4o',
+        icon: styledCommon(BubbleChart),
     }, {
         id: 'zj',
         title: "浙江疫情",
@@ -107,19 +138,7 @@ const appData: AppOption = {
         href: '/province/[id]',
         as:'/province/ck6gr8qgu001dgh7cgcuydjf0',
         icon: styledCommon(Notifications),
-    }, {
-        id: 'dalian',
-        title: "大连疫情",
-        href: '/city/[id]',
-        as:'/city/ck6gr96li003dgh7c8vfphaab',
-        icon: styledCommon(Notifications),
-    }, {
-        id: 'shengayng',
-        title: "沈阳疫情",
-        href: '/city/[id]',
-        as:'/city/ck6gr96e4003cgh7c6izd4uaz',
-        icon: styledCommon(Language),
-    }
+    }, 
     ],
     components: {
         Link: Link as any,

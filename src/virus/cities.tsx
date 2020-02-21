@@ -5,14 +5,19 @@ import { CityRecord } from './model'
 import { formatDate } from '../helper/typeHelper'
 import { pipe } from 'fp-ts/lib/pipeable'
 import Link from '../components/Link'
-import { getCityByLastDate,cityTable } from './helper'
-export const provinces = (variable: any): TCard<CityVirusRecord[]> => ({
+import { getCityByLastDate } from './helper'
+
+import { cityTable,getCityLink } from './viewHelper'
+export const cities = (variable: any={}): TCard<CityVirusRecord[]> => ({
     _type: 'card',
     model: CityRecord,
     query: {
         useQuery: useStatByCityQuery,
         queryName: "cityRecords",
-        variable,
+        variable:{
+            ...variable,
+            last:true
+        },
         
     },
 
@@ -35,7 +40,7 @@ export const provinces = (variable: any): TCard<CityVirusRecord[]> => ({
     },
     transform: (as: StatByCityQuery['cityRecords']): CityVirusRecord[] => {
 
-        const values = as.map(a => ({
+     /*    const values = as.map(a => ({
             ...a,
             province: a.province.title,
             
@@ -45,10 +50,10 @@ export const provinces = (variable: any): TCard<CityVirusRecord[]> => ({
             countryId:a.country.cuid,
             cityId:a.city.cuid
             
-        } as CityVirusRecord))
+        } as CityVirusRecord)) */
 
         return pipe(
-            values,
+            as,
             getCityByLastDate,
         ) as CityVirusRecord[]
     },
@@ -59,6 +64,10 @@ export const provinces = (variable: any): TCard<CityVirusRecord[]> => ({
             sm: 12,
             md: 12,
         },
+        ord:{
+            name:'confirmedCount',
+            order:'desc'
+        },
         model: {
             ...CityRecord,
             fields: CityRecord.fields.map(a => {
@@ -66,9 +75,10 @@ export const provinces = (variable: any): TCard<CityVirusRecord[]> => ({
                     return {
                         ...a,
                         formating: (value: CityVirusRecord) => {
-                            const name = value ? value.city : 'null'
-                            const id = value ? value.cityId : 'null'
-                            return (<Link href={`/city/[id]`} as={`/city/${id}`}><a>{name}</a></Link>)
+                           const link= getCityLink(value)
+                           // const name = value ? value.city : 'null'
+                           // const id = value ? value.cityId : 'null'
+                            return (<Link href={link.href} as={link.as}><a>{link.title}</a></Link>)
                         }
                     } as TFormatField
                 } else {
@@ -79,4 +89,4 @@ export const provinces = (variable: any): TCard<CityVirusRecord[]> => ({
         names:cityTable
     }
 });
-export default provinces
+export default cities

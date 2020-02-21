@@ -11,10 +11,7 @@ import * as ApolloReactHooks from '@apollo/react-hooks';
 
 export type RumorsQueryVariables = {
   skip?: Types.Maybe<Types.Scalars['Int']>,
-  first?: Types.Maybe<Types.Scalars['Int']>,
-  searchText?: Types.Maybe<Types.Scalars['String']>,
-  from?: Types.Maybe<Types.Scalars['DateTime']>,
-  to?: Types.Maybe<Types.Scalars['DateTime']>
+  first?: Types.Maybe<Types.Scalars['Int']>
 };
 
 
@@ -28,8 +25,8 @@ export type RumorsQuery = (
 
 
 export const RumorsDocument = gql`
-    query Rumors($skip: Int, $first: Int, $searchText: String, $from: DateTime, $to: DateTime) {
-  rumors(first: $first, skip: $skip, where: {recordAt: {gte: $from, lte: $to}, OR: [{title: {contains: $searchText}, content: {contains: $searchText}, subTitle: {contains: $searchText}}]}, orderBy: {recordAt: desc}) {
+    query Rumors($skip: Int, $first: Int) {
+  rumors(first: $first, skip: $skip) @client {
     id
     title
     content
@@ -53,9 +50,6 @@ export const RumorsDocument = gql`
  *   variables: {
  *      skip: // value for 'skip'
  *      first: // value for 'first'
- *      searchText: // value for 'searchText'
- *      from: // value for 'from'
- *      to: // value for 'to'
  *   },
  * });
  */

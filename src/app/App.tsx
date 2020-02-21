@@ -6,6 +6,7 @@ import AppDrawer from './components/AppDrawer';
 import MenuAction from './components/MenuAction'
 import AppContent from './components/AppContent'
 
+import PerfectScrollbar from "perfect-scrollbar";
 //import AppSearch from './components/AppSearch'
 import AppPage from './components/AppBody';
 import { img as Img } from 'macoolka-ui-components/lib/Html'
@@ -17,6 +18,8 @@ import { registerServiceWorker, loadDependencies } from './helper'
 
 import { StylesProvider, jssPreset } from '@material-ui/styles';
 import FlexFlow from 'macoolka-ui-components/lib/FlexGrow'
+
+import Router from 'next/router'
 let dependenciesLoaded = false;
 // Configure JSS
 const jss = create({
@@ -26,15 +29,25 @@ const jss = create({
 const AppFrame: React.SFC<{}> = ({ children, }) => {
   const resource = useAppResource()
   const { bgImgUrl } = useAppInfo()
-  const { isShowBar } = useAppStyle()
+  const { isShowBar,isOpenNav,toggleNav } = useAppStyle()
   const { PageRoot, PageToolBar } = useAppComponents()
+  const resizeFunction = () => {
+    if (window.innerWidth >= 960) {
+      toggleNav(false);
+    }
+  };
+
+  Router.events.on('routeChangeComplete', () => {
+    toggleNav(false);
+  })
+  const mainPanel = React.createRef<any>();
   React.useEffect(() => {
     if (dependenciesLoaded)
       return
     dependenciesLoaded = true
 
     loadDependencies(resource);
-    registerServiceWorker();
+   // registerServiceWorker();
 
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
@@ -42,6 +55,25 @@ const AppFrame: React.SFC<{}> = ({ children, }) => {
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);
+  React.useEffect(() => {
+    let ps;
+    if (navigator.platform.indexOf("Win") > -1) {
+      ps = new PerfectScrollbar(mainPanel.current, {
+        suppressScrollX: true,
+        suppressScrollY: false
+      });
+      document.body.style.overflow = "hidden";
+    }
+
+    window.addEventListener("resize", resizeFunction);
+    // Specify how to clean up after this effect:
+    return function cleanup() {
+      if (navigator.platform.indexOf("Win") > -1) {
+        ps.destroy();
+      }
+      window.removeEventListener("resize", resizeFunction);
+    };
+  }, [mainPanel]);
   return (
     <StylesProvider jss={jss}>
       <AppPage>

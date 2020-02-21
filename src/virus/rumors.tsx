@@ -1,9 +1,9 @@
 import { useRumorsQuery, RumorsQuery,RumorsQueryVariables } from '../generated/hook/rumors.generated'
 import { TRow,TCard } from '../types'
-import { Rumor, } from './types'
+import { RumorInput, } from './types'
 import { RumorModel } from './model'
 import RumorCard from './rumor'
-export const rumors = (variable: RumorsQueryVariables): TRow<Rumor[]> => ({
+export const rumors = (variable: RumorsQueryVariables): TRow<RumorInput[]> => ({
     _type: 'row',
     model:RumorModel,
     query: {
@@ -25,7 +25,7 @@ export const rumors = (variable: RumorsQueryVariables): TRow<Rumor[]> => ({
         md: 12
     },
     isList:true,
-    transform: (as: RumorsQuery['rumors']): Rumor[] => {
+    transform: (as: RumorsQuery['rumors']): RumorInput[] => {
         return as
        
     },

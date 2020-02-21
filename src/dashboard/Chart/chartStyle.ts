@@ -1,5 +1,7 @@
 
-import Chartist from "chartist"
+import Chartist,{  ILineChartOptions,
+    IBarChartOptions,
+    IPieChartOptions,} from "chartist"
 export const lineAnimation = ({ delays = 80, durations = 500 }: { delays?: number, durations?: number }) => ({
     draw: function (data: any) {
         if (data.type === "line" || data.type === "area") {
@@ -39,7 +41,7 @@ export const lineAnimation = ({ delays = 80, durations = 500 }: { delays?: numbe
         }
     }
 })
-export const lineOption = ({ type, low, high }: { type: "Line" | "Bar" | "Area" | "Point", low: number, high: number }) => {
+export const lineOption = ({ type, low, high }: { type: "Line" | "Bar" | "Area" | "Point", low: number, high: number }) :ILineChartOptions=> {
     if (type === 'Bar') {
         return {
             axisX: {
@@ -73,16 +75,17 @@ export const lineOption = ({ type, low, high }: { type: "Line" | "Bar" | "Area" 
 
 
 };
-export const responsiveOptions = () => ([
+export const responsiveOptions = (type: "Line" | "Bar" | "Area" | "Point") => ([
     [
         "screen and (max-width: 640px)",
         {
             seriesBarDistance: 5,
+            showPoint:false,
             axisX: {
                 labelInterpolationFnc: function (value:any[]) {
                     return value[0];
                 }
             }
-        }
+        } as ILineChartOptions
     ]
 ])

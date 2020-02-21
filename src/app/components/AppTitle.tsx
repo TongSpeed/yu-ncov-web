@@ -6,7 +6,7 @@ export default () => {
   const Link = useLink()
   const { title, href, as, logo } = useAppInfo()
   return (
-    <Element mkFlex="rowCenter" mkHeight="appbar" mkPadding="medium" mkCursor="pointer" mkAbsolute="top" mkColor="inherit">
+    <Element mkFlex="rowCenter" mkHeight="bar_large" mkPadding="medium" mkCursor="pointer" mkAbsolute="top" mkColor="inherit">
       <Img mkMarginLeft="medium" src={logo} mkWidth="element_small" mkHeight="element_small" />
       <Link href={href} as={as} >
         <Element mkTypography="h6" mkTextColor="inherit" mkMarginLeft="medium">{title}</Element>

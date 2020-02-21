@@ -3,8 +3,9 @@ import { useEventCallback } from 'macoolka-ui-core/lib/event'
 import { map, withLatestFrom } from "macoolka-reactive";
 import { pipe } from "fp-ts/lib/pipeable";
 import { get } from 'macoolka-object'
-import { AppState, AppOption,TLink } from './types'
+import { AppState, AppOption, TLink } from './types'
 import { getCookie } from 'macoolka-ui-core/lib/utils';
+import { isBoolean } from 'macoolka-predicate'
 
 import {
   ThemeProvider as MuiThemeProvider,
@@ -12,23 +13,25 @@ import {
 export const AppContext = React.createContext<AppState>(null as any);
 
 export const useAppState = ({ style, info, components, constant, resource, functions, navItems }: AppOption): AppState => {
- 
+
   const { state: pageTitles = [], callback: setPageTitles } = useEventCallback<TLink[], TLink[]>(
     {
       callback: ({ event }) => event,
       initialState: [],
     })
-    const { state: isShowBar = true, callback: setShowBar } = useEventCallback<boolean, boolean>(
-      {
-        callback: ({ event }) => event,
-        initialState: get(style, 'isShowBar', true),
-      })
-  const { state: isOpenNav, callback: toggleNav } = useEventCallback<void, boolean>(
+  const { state: isShowBar = true, callback: setShowBar } = useEventCallback<boolean, boolean>(
+    {
+      callback: ({ event }) => event,
+      initialState: get(style, 'isShowBar', true),
+    })
+  const { state: isOpenNav, callback: toggleNav } = useEventCallback<boolean | undefined, boolean>(
     {
       callback: ({ event, state }) => pipe(
         event,
         withLatestFrom(state),
-        map(([_, state]) => !state)
+        map(([value, state]) =>{
+            return isBoolean(value) ? value : !state
+        } )
       ),
       initialState: get(style, 'isOpenNav', true),
     })
@@ -67,7 +70,7 @@ export const useAppState = ({ style, info, components, constant, resource, funct
   // let pageTitle=[]
   return {
     style: {
-      
+
       isShowBar,
       setShowBar,
       isOpenNav,
@@ -79,7 +82,7 @@ export const useAppState = ({ style, info, components, constant, resource, funct
       locale,
       setLocale,
     },
-    page:{
+    page: {
       pageTitles,
       setPageTitles,
     },
@@ -116,7 +119,7 @@ export const AppProvider: React.SFC<{ data: AppOption }> = ({ children, data }) 
   }, [isLight]);
 
 
-  const theme =data.style.theme
+  const theme = data.style.theme
   /*  React.useMemo(() => {
     return createTheme(data.style.theme, locale as any)(data.style.buildComponents);
 

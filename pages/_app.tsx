@@ -1,87 +1,29 @@
 import React from 'react';
-import App, { AppContext } from 'next/app';
+import App from 'next/app';
 import Root from '../src/app/App'
 import { AppProvider } from '../src/app/AppContext'
-import Head from 'next/head';
-import { ApolloProvider } from '@apollo/react-hooks';
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
-import { HttpLink } from 'apollo-link-http';
 import appOption from '../data'
-import fetch from 'isomorphic-unfetch'
-//const uri=process.env.GRAPHQL_URL ||"http://localhost:3000/api/graphql" 
-export let apolloClient: ApolloClient<NormalizedCacheObject> | null = null;
-export const initApolloClient =  (initialState = {}) => {
-  
-    const link = new HttpLink({
-            uri: "http://ncov.macoolka.com:4000",
-            credentials: 'same-origin',
-            fetch,
-        })
 
-    const createApolloClient = (initialState = {}) => {
-        return new ApolloClient({
-            ssrMode: typeof window === 'undefined',
-            link,
-            cache: new InMemoryCache().restore(initialState)
-        });
-    };
-    if (typeof window === 'undefined') {
-        return createApolloClient(initialState);
-    }
+import "perfect-scrollbar/css/perfect-scrollbar.css";
+import withApolloClient from '../src/virus/apollo/withApolloClient'
 
-    if (!apolloClient) {
-        apolloClient = createApolloClient(initialState);
-    }
 
-    return apolloClient;
-};
-
-export default class MyApp extends App<{
-    apolloState: {}
-
-}> {
-    client = apolloClient || initApolloClient(this.props.apolloState);
+ class MyApp extends App {
+ 
     render() {
         const { Component, pageProps } = this.props;
-        return (<ApolloProvider client={this.client}>
+        return (  
+       
             <AppProvider data={appOption}>
                 <Root >
                     <Component {...pageProps} />
                 </Root>
             </AppProvider>
+           
 
-        </ApolloProvider>
+     
         );
     }
 }
-MyApp.getInitialProps = async ({ ctx }: AppContext) => {
-    const { AppTree } = ctx;
-    apolloClient = initApolloClient();
-    let pageProps = {};
-    if (typeof window === 'undefined') {
-        try {
-            const { getDataFromTree } = await import('@apollo/react-ssr');
-            await getDataFromTree(
-                <AppTree
-                    pageProps={{
-                        ...pageProps,
 
-                    }}
-                />
-            );
-        } catch (error) {
-            console.error('Error while running `getDataFromTree`', error);
-        }
-        Head.rewind();
-    }
-
-    const apolloState = apolloClient.cache.extract();
-
-    return {
-        pageProps,
-        apolloState,
-
-    }
-}
-
+export default withApolloClient(MyApp)

@@ -1,19 +1,19 @@
 
 import { useStatByProvinceQuery,StatByProvinceQuery } from '../generated/hook/statByProvince.generated'
 
-import {TPage,TLink} from '../types'
-import { toVirusRecords,ordRecordAt,getWorldLink,getCountryLink,getProvinceLink ,getLastRecordAtString } from './helper'
+import {TPage,TLinkData} from '../types'
+import {getWorldLink,getCountryLink,getProvinceLink ,getLastRecordAtString} from './viewHelper'
 import { formatDate } from '../helper/typeHelper'
 import { ProvinceRecord } from './model'
 import { template } from './common'
-import {ProvinceVirusRecord} from './types'
+import {ProvinceVirusRecord,VRecordNorm} from './types'
 import * as A from 'fp-ts/lib/Array'
 import { pipe } from 'fp-ts/lib/pipeable'
 import * as O from 'fp-ts/lib/Option'
 
 import { today5Day } from '../helper/typeHelper'
 import cities from './cities'
-export const province=(variable:any):TPage<ProvinceVirusRecord[]>=>({
+export const province=(variable:any):TPage<Array<ProvinceVirusRecord&VRecordNorm>>=>({
     _type:'page',
     model:ProvinceRecord,
     query:{
@@ -24,8 +24,8 @@ export const province=(variable:any):TPage<ProvinceVirusRecord[]>=>({
     titles: (as) => pipe(
         as,
         A.head,
-        O.map((a) => [getWorldLink(), getCountryLink(a),getProvinceLink(a)]),
-        O.getOrElse(() => [] as TLink[])
+        O.map((a) => [getWorldLink(), getCountryLink(a.province),getProvinceLink(a)]),
+        O.getOrElse(() => [] as TLinkData[])
     ),
     title:{
         items:[{
@@ -34,22 +34,8 @@ export const province=(variable:any):TPage<ProvinceVirusRecord[]>=>({
         }]
     }, 
   
-    transform:(as:StatByProvinceQuery['provinceRecords'])=>{
-      return  pipe(
-            as,
-            A.map(a=>({...a,country:a.country.title,province:a.province.title,
-                countryId:a.country.cuid,
-                 provinceId:a.province.cuid,
-              
-            }  as ProvinceVirusRecord)),
-            A.sort(ordRecordAt),
-            A.reverse,
-            as=>toVirusRecords(as) as ProvinceVirusRecord[],
-            A.reverse,
-
-        )
-    },
-     items: [...template("province", ProvinceRecord), cities({ province: variable.province[0], ...today5Day() })
+   
+     items: [...template("province", ProvinceRecord), cities({ province: variable.province })
 ]
 }) 
 export default province

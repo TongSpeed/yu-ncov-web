@@ -46,7 +46,7 @@ export interface SiteStyle {
 
 export interface SiteStyleHandle {
     setShowBar: (a: boolean) => void
-    toggleNav: (a: any) => void
+    toggleNav: (a?: boolean|undefined) => void
     toggleExpandNav: (a: any) => void
     toggleLight: (a?: any) => void
     setLocale: (a: string) => void

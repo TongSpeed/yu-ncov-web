@@ -1,7 +1,7 @@
 {
   "name": "玉彤数据",
   "short_name": "玉彤",
-  "display": "玉彤数据",
+  "display": "standalone",
   "start_url": "/",
   "theme_color": "#2196f3",
   "background_color": "#ffffff",

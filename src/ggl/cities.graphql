@@ -1,7 +1,0 @@
-query Cites($provice:String!){
-  cities(where:{province:{id:{equals:$provice}}}){
-    id
-    title,  
-    cuid
-  }
-}

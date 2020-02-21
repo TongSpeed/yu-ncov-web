@@ -1,11 +1,13 @@
 
 import { QueryHookOptions, MutationHookOptions, MutationTuple } from '@apollo/react-hooks';
 import { QueryResult } from '@apollo/react-common';
-export interface TLink {
+export interface TLinkData {
     title: string;
     href?: string;
     as?: string;
 }
+export type TBasicType='number'|'string'|'datetime'|'boolean'
+export type MediaType='xs'|'sm'|'lg'|'xl'
 export type ColorEnum = "warning" |
     "success" |
     "danger" |
@@ -48,6 +50,7 @@ export interface TColor {
  * @since 0.3.0
  */
 export interface TField {
+    _type: 'field'
     /**
      * title
      * @desczh
@@ -55,6 +58,7 @@ export interface TField {
      * @since 0.2.0
      */
     title: string
+    shortTitle?:string
     required?: boolean
     id?: boolean
     /**
@@ -64,15 +68,18 @@ export interface TField {
      * @since 0.2.0
      */
     helperText?: string
+    color?:ColorEnum
     name: string
-    type: 'string' | 'datetime' | 'int' | 'number' | 'date' | 'boolean'
+    type: 'string' | 'datetime' | 'int' | 'number' | 'date' | 'boolean' | TModel
     readonly?: boolean
     format?: string
+    shortFormat?:string
     defaultValue?: number | string | boolean | 'now' | 'yesterday'
+    calculate?: <T>(value: T, values?: T[]) => number | string | boolean
 }
 
 export type FormatingFunction<TData> = (a: TData) => React.ReactNode
-
+export type Order = 'asc' | 'desc';
 export interface TFormatField<TData = any> extends TField {
     formating?: FormatingFunction<TData>
 }
@@ -83,15 +90,14 @@ export interface TFormatField<TData = any> extends TField {
  * @since 0.3.0
  */
 export interface TModel<T = {}> {
-
+    _type: 'model'
     name: string
     title: string
     fields: Array<TField & T>
 }
-export interface TFormatModel<TData> {
+export interface TFormatModel<TData> extends TModel {
 
-    name: string
-    title: string
+
     fields: Array<TFormatField<TData>>
 }
 export interface TItem<TData> extends TComponent<TData> {
@@ -100,6 +106,7 @@ export interface TItem<TData> extends TComponent<TData> {
 
 export interface TList<TData> extends TComponent<TData> {
     model?: TFormatModel<TData>,
+    ord?: { name: string, order: Order }
 }
 export interface TKeyCard<TData> extends TColor, LikeCardComponent<TData>, TItem<TData> {
     _type: 'keycard'
@@ -131,7 +138,7 @@ export interface TContainer<TData> extends TComponent<TData>, LikeCardComponent<
 
 export type TFieldValue<TData> =
     | FormatingFunction<TData>
-    | { field: string | TFormatField, type: 'label' | 'value' }
+    | { field: string | TFormatField, type: 'label' | 'value',short?:boolean }
     | string
 
 export interface TTextField {
@@ -152,9 +159,9 @@ export interface TTextField {
 }
 export type TChild<TData> = {
     isList?: boolean
-    items: Array<TNode<TData>> | TNode<TData> 
+    items: Array<TNode<TData>> | TNode<TData>
 }
-export type TNodeValue<TData>=TNode<TData> |TFieldValue<TData>
+export type TNodeValue<TData> = TNode<TData> | TFieldValue<TData>
 export interface LikeCardComponent<TData> {
 
     title?: TChild<TData>
@@ -167,7 +174,7 @@ export interface LikeCardComponent<TData> {
 export interface TFieldDisplay<TData = any> extends TComponent<TData> {
     _type: 'field'
     field: TFieldValue<TData>,
-    type?: 'paragraph' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'quote' |'markdown'
+    type?: 'paragraph' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'quote' | 'markdown'
 
 }
 export interface TCard<TData> extends TContainer<TData> {
@@ -185,7 +192,7 @@ export interface TQuery {
     query?: {
         useQuery: (options?: QueryHookOptions) => QueryResult,
         queryName?: string,
-        infiniteScroll?:boolean,
+        infiniteScroll?: boolean,
         variable?: any,
     }
 
@@ -193,7 +200,12 @@ export interface TQuery {
 }
 export interface TPage<TData> extends TContainer<TData> {
     _type: 'page'
-    titles: ((a: TData) => TLink[]) | TLink[]
+    titles: ((a: TData) => TLinkData[]) | TLinkData[]
+}
+
+export interface TLink<TData> extends TLinkData, TComponent<TData> {
+    _type: 'link'
+
 }
 export interface TRow<TData> extends TContainer<TData> {
     _type: 'row'
@@ -201,4 +213,4 @@ export interface TRow<TData> extends TContainer<TData> {
 }
 
 export type TNode<TData> = TRow<TData> | TKeyCard<TData>
-    | TPage<TData> | TChart<TData> | TTable<TData> | TCard<TData> | TFieldDisplay<TData> | TDataContainer<TData>
+    | TPage<TData> | TChart<TData> | TTable<TData> | TCard<TData> | TFieldDisplay<TData> | TDataContainer<TData> | TLink<TData>

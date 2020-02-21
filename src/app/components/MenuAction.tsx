@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 export default () => {
     const classes = useStyles()
     const { openDrawer } = useAppConstant()
-    const { toggleExpandNav } = useAppStyle()
+    const { toggleNav } = useAppStyle()
     return (
 
         <Tooltip title={openDrawer} enterDelay={300}>
@@ -26,7 +26,7 @@ export default () => {
                 edge="start"
                 color="inherit"
                 aria-label={openDrawer}
-                onClick={toggleExpandNav}
+                onClick={()=>toggleNav()}
                 className={classes.navIconHide}
             >
                 <MenuIcon />

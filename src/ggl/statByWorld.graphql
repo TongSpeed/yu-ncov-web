@@ -1,0 +1,19 @@
+query worlds { 
+  worldRecords @client{
+    id
+    deadCount,
+    curedCount,
+    confirmedCount,
+    suspectedCount,
+    recordAt
+
+    confirmedCountAdd
+    curedCountAdd
+    deadCountAdd
+    suspectedCountAdd
+    confirmedCountAddRate
+    curedCountAddRate
+    deadCountAddRate
+    suspectedCountAddRate
+  }
+}

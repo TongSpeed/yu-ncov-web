@@ -1,7 +1,0 @@
-query Countries{
-  countries{
-  id
-  title
-  cuid
-}
-}

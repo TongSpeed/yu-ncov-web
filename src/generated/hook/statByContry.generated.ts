@@ -10,10 +10,7 @@ import * as ApolloReactHooks from '@apollo/react-hooks';
 
 
 export type StatByCountryQueryVariables = {
-  orderBy?: Types.Maybe<Types.CountryRecordOrderByInput>,
-  from?: Types.Maybe<Types.Scalars['DateTime']>,
-  to?: Types.Maybe<Types.Scalars['DateTime']>,
-  country?: Types.Maybe<Array<Types.Scalars['String']>>
+  country?: Types.Maybe<Types.Scalars['String']>
 };
 
 
@@ -21,29 +18,37 @@ export type StatByCountryQuery = (
   { __typename?: 'Query' }
   & { countryRecords: Array<(
     { __typename?: 'CountryRecord' }
-    & Pick<Types.CountryRecord, 'curedCount' | 'recordAt' | 'deadCount' | 'suspectedCount' | 'confirmedCount' | 'continents'>
+    & Pick<Types.CountryRecord, 'id' | 'curedCount' | 'recordAt' | 'deadCount' | 'suspectedCount' | 'confirmedCount' | 'confirmedCountAdd' | 'curedCountAdd' | 'deadCountAdd' | 'suspectedCountAdd' | 'confirmedCountAddRate' | 'curedCountAddRate' | 'deadCountAddRate' | 'suspectedCountAddRate'>
     & { country: (
       { __typename?: 'Country' }
-      & Pick<Types.Country, 'id' | 'title' | 'cuid'>
+      & Pick<Types.Country, 'id' | 'title' | 'continents'>
     ) }
   )> }
 );
 
 
 export const StatByCountryDocument = gql`
-    query statByCountry($orderBy: CountryRecordOrderByInput = {recordAt: desc}, $from: DateTime, $to: DateTime, $country: [String!]) {
-  countryRecords(orderBy: $orderBy, where: {recordAt: {gte: $from, lte: $to}, country: {cuid: {in: $country}, NOT: {id: {contains: "�"}}}}) {
+    query statByCountry($country: String) {
+  countryRecords(country: $country) @client {
     country {
       id
       title
-      cuid
+      continents
     }
+    id
     curedCount
     recordAt
     deadCount
     suspectedCount
     confirmedCount
-    continents
+    confirmedCountAdd
+    curedCountAdd
+    deadCountAdd
+    suspectedCountAdd
+    confirmedCountAddRate
+    curedCountAddRate
+    deadCountAddRate
+    suspectedCountAddRate
   }
 }
     `;
@@ -60,9 +65,6 @@ export const StatByCountryDocument = gql`
  * @example
  * const { data, loading, error } = useStatByCountryQuery({
  *   variables: {
- *      orderBy: // value for 'orderBy'
- *      from: // value for 'from'
- *      to: // value for 'to'
  *      country: // value for 'country'
  *   },
  * });

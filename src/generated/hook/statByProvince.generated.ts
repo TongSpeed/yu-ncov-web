@@ -10,11 +10,8 @@ import * as ApolloReactHooks from '@apollo/react-hooks';
 
 
 export type StatByProvinceQueryVariables = {
-  orderBy?: Types.Maybe<Types.ProvinceRecordOrderByInput>,
-  from?: Types.Maybe<Types.Scalars['DateTime']>,
-  to?: Types.Maybe<Types.Scalars['DateTime']>,
   country?: Types.Maybe<Types.Scalars['String']>,
-  province?: Types.Maybe<Array<Types.Scalars['String']>>
+  province?: Types.Maybe<Types.Scalars['String']>
 };
 
 
@@ -22,36 +19,44 @@ export type StatByProvinceQuery = (
   { __typename?: 'Query' }
   & { provinceRecords: Array<(
     { __typename?: 'ProvinceRecord' }
-    & Pick<Types.ProvinceRecord, 'curedCount' | 'recordAt' | 'deadCount' | 'suspectedCount' | 'confirmedCount'>
-    & { country: (
-      { __typename?: 'Country' }
-      & Pick<Types.Country, 'id' | 'title' | 'cuid'>
-    ), province: (
+    & Pick<Types.ProvinceRecord, 'id' | 'curedCount' | 'recordAt' | 'deadCount' | 'suspectedCount' | 'confirmedCount' | 'confirmedCountAdd' | 'curedCountAdd' | 'deadCountAdd' | 'suspectedCountAdd' | 'confirmedCountAddRate' | 'curedCountAddRate' | 'deadCountAddRate' | 'suspectedCountAddRate'>
+    & { province: (
       { __typename?: 'Province' }
-      & Pick<Types.Province, 'id' | 'title' | 'cuid'>
+      & Pick<Types.Province, 'id' | 'title'>
+      & { country: (
+        { __typename?: 'Country' }
+        & Pick<Types.Country, 'id' | 'title'>
+      ) }
     ) }
   )> }
 );
 
 
 export const StatByProvinceDocument = gql`
-    query statByProvince($orderBy: ProvinceRecordOrderByInput = {recordAt: desc}, $from: DateTime, $to: DateTime, $country: String, $province: [String!]) {
-  provinceRecords(orderBy: $orderBy, where: {recordAt: {gte: $from, lte: $to}, province: {cuid: {in: $province}, NOT: {id: {contains: "�"}}}, country: {cuid: {equals: $country}, NOT: {id: {contains: "�"}}}}) {
-    country {
-      id
-      title
-      cuid
-    }
+    query statByProvince($country: String, $province: String) {
+  provinceRecords(province: $province, country: $country) @client {
     province {
       id
       title
-      cuid
+      country {
+        id
+        title
+      }
     }
+    id
     curedCount
     recordAt
     deadCount
     suspectedCount
     confirmedCount
+    confirmedCountAdd
+    curedCountAdd
+    deadCountAdd
+    suspectedCountAdd
+    confirmedCountAddRate
+    curedCountAddRate
+    deadCountAddRate
+    suspectedCountAddRate
   }
 }
     `;
@@ -68,9 +73,6 @@ export const StatByProvinceDocument = gql`
  * @example
  * const { data, loading, error } = useStatByProvinceQuery({
  *   variables: {
- *      orderBy: // value for 'orderBy'
- *      from: // value for 'from'
- *      to: // value for 'to'
  *      country: // value for 'country'
  *      province: // value for 'province'
  *   },

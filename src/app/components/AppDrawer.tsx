@@ -8,6 +8,7 @@ import AppTitle from './AppTitle'
 import { parseStandProp } from 'macoolka-ui-core'
 import SideBar from './Sidebar'
 import { useAppStyle, useNavItems } from '../AppContext'
+import AppBottom from './AppBottom'
 //import { QueryCategories } from '../../schema/ggl'
 let savedScrollTop: undefined | number = undefined;
 const PersistScroll: React.SFC<{}> = ({ children }) => {
@@ -44,7 +45,12 @@ const useStyles = makeStyles(theme => {
         appNav: {
             ...(parseStandProp(theme)({
                 mkScrollBar: "vertical",
-                height: 'calc(100vh - 75px)',
+                height: 'calc(100vh - 130px)',
+                mkMedia:[{
+                    height: 'calc(100vh - 110px)',
+                },{
+                    
+                }]
             })),
 
         },
@@ -132,9 +138,13 @@ const AppDrawer: React.SFC<AppDrawerProp> = (props) => {
                 <Divider className={classes.divider} />
                 <PersistScroll>
                     <List className={classes.appNav}>
-                        {navItems.map(a => <NavItem key={a.id} data={a} depth={0} props={props}></NavItem>)}
+                        {navItems.map(a =>a.title==='-'
+                        ?<Divider className={classes.divider} key={a.id}/>
+                        :<NavItem key={a.id} data={a} depth={0} props={props}></NavItem>)}
                     </List>
+                   
                 </PersistScroll>
+                <AppBottom/>
             </div>
 
         </SideBar>

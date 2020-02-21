@@ -1,9 +1,7 @@
 import React from 'react';
 import { TNode, Grid } from '../types'
 import GridContainer from "../dashboard/Grid/GridContainer";
-import { merge } from 'macoolka-object'
 import GridItem from "../dashboard/Grid/GridItem";
-import Error from 'macoolka-ui-components/lib/Error'
 import { isArray } from 'macoolka-predicate'
 import Page from './Page'
 import KeyCard from './KeyCard'
@@ -13,6 +11,7 @@ import Card from './Card'
 import Container from './Contaner'
 import FieldDisplay from './FieldDisplay'
 import Query from './Query'
+import Link from './Link'
 let key = 0
 const toChildModel = (parent: TNode<any>) => (child: TNode<any>): TNode<any> => ({
     model: parent.model,
@@ -87,6 +86,9 @@ const ModelView: React.SFC<{ model: TNode<any>, value?: any }> =
                 case 'field':
                     R = <FieldDisplay model={model} value={a}> </FieldDisplay>
                     break;
+                case 'link':
+                        R = <Link as={model.as} href={model.href}>{model.title} </Link>
+                        break;
                 default:
                     R = <GridContainer> </GridContainer>
                     break;

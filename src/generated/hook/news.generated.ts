@@ -11,11 +11,7 @@ import * as ApolloReactHooks from '@apollo/react-hooks';
 
 export type NewsQueryVariables = {
   skip?: Types.Maybe<Types.Scalars['Int']>,
-  first?: Types.Maybe<Types.Scalars['Int']>,
-  searchText?: Types.Maybe<Types.Scalars['String']>,
-  from?: Types.Maybe<Types.Scalars['DateTime']>,
-  to?: Types.Maybe<Types.Scalars['DateTime']>,
-  province?: Types.Maybe<Types.Scalars['String']>
+  first?: Types.Maybe<Types.Scalars['Int']>
 };
 
 
@@ -29,8 +25,8 @@ export type NewsQuery = (
 
 
 export const NewsDocument = gql`
-    query news($skip: Int, $first: Int, $searchText: String, $from: DateTime, $to: DateTime, $province: String) {
-  news(first: $first, skip: $skip, where: {recordAt: {gte: $from, lte: $to}, province: {equals: $province}, OR: [{title: {contains: $searchText}, content: {contains: $searchText}, province: {contains: $searchText}, infoSource: {contains: $searchText}}]}, orderBy: {recordAt: desc}) {
+    query news($skip: Int, $first: Int) {
+  news(first: $first, skip: $skip) @client {
     id
     title
     content
@@ -56,10 +52,6 @@ export const NewsDocument = gql`
  *   variables: {
  *      skip: // value for 'skip'
  *      first: // value for 'first'
- *      searchText: // value for 'searchText'
- *      from: // value for 'from'
- *      to: // value for 'to'
- *      province: // value for 'province'
  *   },
  * });
  */

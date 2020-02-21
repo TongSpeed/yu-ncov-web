@@ -3,8 +3,8 @@ import Breadcrumbs from 'macoolka-ui-components/lib/Breadcrumbs';
 import { useLink, useAppInfo } from '../app/AppContext'
 import Element from 'macoolka-ui-components/lib/Element'
 import Head from 'next/head'
-import { TLink } from '../types'
-export const PageTitle: React.SFC<{ pageTitles: TLink[] }> = ({ pageTitles }) => {
+import { TLinkData } from '../types'
+export const PageTitle: React.SFC<{ pageTitles: TLinkData[] }> = ({ pageTitles }) => {
   const info = useAppInfo()
   const Link = useLink()
   //React.use

@@ -1,7 +1,7 @@
 import { TCard } from '../types'
-import { News } from './types'
+import { NewsInput } from './types'
 import { NewsModel } from './model'
-export const RumorCard: TCard<News> = ({
+export const RumorCard: TCard<NewsInput> = ({
     _type: 'card',
     model: NewsModel,
     
