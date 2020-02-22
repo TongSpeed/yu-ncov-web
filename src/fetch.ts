@@ -1,6 +1,7 @@
 import * as TE from 'fp-ts/lib/TaskEither'
 import { pipe } from 'fp-ts/lib/pipeable'
 import { showUnknow } from 'macoolka-object'
+let jsonpAdapter = require('axios-jsonp');
 import zlib from 'zlib'
 import axios from 'axios'
 import gzip from 'gzip-js'
@@ -13,12 +14,12 @@ export const fetch = (root: string): Fetch => {
             TE.tryCatch(() => axios.get(
                 root + path,
                 {
-                    responseType: 'json',
-                    headers: {
-                        "Access-Control-Allow-Origin": "*"
-                    }
+                  //  responseType: 'json',
+                    adapter: jsonpAdapter,
+                  
                 }
             ), error => {
+                console.log(error)
                 return showUnknow.show(error)
             }),
             TE.map(res => res.data as T)

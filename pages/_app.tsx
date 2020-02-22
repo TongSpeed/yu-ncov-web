@@ -6,8 +6,6 @@ import appOption from '../data'
 
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import withApolloClient from '../src/virus/apollo/withApolloClient'
-
-
  class MyApp extends App {
  
     render() {

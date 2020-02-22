@@ -1,5 +1,8 @@
 {
-    "env": {
-      "VARIABLE_NAME": "@variable-name"
-    }
+  
+    
+      "github": {
+        "enabled": true
+      }
+    
   }
