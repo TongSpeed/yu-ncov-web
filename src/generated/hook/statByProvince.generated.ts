@@ -34,7 +34,7 @@ export type StatByProvinceQuery = (
 
 export const StatByProvinceDocument = gql`
     query statByProvince($country: String, $province: String) {
-  provinceRecords(province: $province, country: $country) @client {
+  provinceRecords(province: $province, country: $country) {
     province {
       id
       title

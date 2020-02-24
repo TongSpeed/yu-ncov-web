@@ -1,14 +1,18 @@
 import React from 'react'
 import Error from 'macoolka-ui-components/lib/Error'
-import { TComponent } from '../types'
+import { TComponent,convertJsonToArray } from 'macoolka-model-core'
 import InfiniteScroll from 'macoolka-ui-components/lib/InfiniteScroll'
 import CircularProgress from '@material-ui/core/CircularProgress';
 const InfiniteScrollQuery: React.SFC<{
     model: TComponent<any>, 
     callback: (a: any) => React.ReactElement
     value?:any
-}> = ({ model: { query }, callback ,value}) => {
+}> = ({ model: { query,model }, callback ,value}) => {
     if (query) {
+        const _callback=(as:any)=>{
+             const values=model?convertJsonToArray(model)(as):as
+            return callback(values)
+        }
         const { infiniteScroll, useQuery, queryName,variable } = query
        
         const { loading, error, data,fetchMore } = useQuery({ variables: variable })
@@ -53,14 +57,14 @@ const InfiniteScrollQuery: React.SFC<{
                         
                     >
                         {
-                            callback(data![queryName])
+                            _callback(data![queryName])
                         }
                     </InfiniteScroll>
     
                 )
             }else{
 
-            return callback(_dataValue)
+            return _callback(_dataValue)
             }
            
 

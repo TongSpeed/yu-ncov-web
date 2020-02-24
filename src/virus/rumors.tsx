@@ -1,7 +1,6 @@
 import { useRumorsQuery, RumorsQuery,RumorsQueryVariables } from '../generated/hook/rumors.generated'
-import { TRow,TCard } from '../types'
-import { RumorInput, } from './types'
-import { RumorModel } from './model'
+import { TRow,TCard } from 'macoolka-model-core'
+import { RumorInput, RumorModel} from 'yu-ncov-core'
 import RumorCard from './rumor'
 export const rumors = (variable: RumorsQueryVariables): TRow<RumorInput[]> => ({
     _type: 'row',

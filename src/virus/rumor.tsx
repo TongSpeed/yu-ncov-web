@@ -1,7 +1,6 @@
-import {  TCard } from '../types'
-import { RumorInput } from './types'
-import { RumorModel } from './model'
-export const RumorCard: TCard<RumorInput> = ({
+import {  TCard } from 'macoolka-model-core'
+import { RumorModel,RumorData } from 'yu-ncov-core'
+export const RumorCard: TCard<RumorData> = ({
     _type: 'card',
     cardType:'article',
     model: RumorModel,

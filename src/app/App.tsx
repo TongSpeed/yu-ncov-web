@@ -14,7 +14,7 @@ import PageTitle from './components/PageTitle'
 import { useAppStyle, useAppInfo, useAppComponents, useAppResource } from './AppContext'
 import AppBar from './components/AppBar'
 import { create } from 'jss';
-import { registerServiceWorker, loadDependencies } from './helper'
+import {  loadDependencies } from './helper'
 
 import { StylesProvider, jssPreset } from '@material-ui/styles';
 import FlexFlow from 'macoolka-ui-components/lib/FlexGrow'

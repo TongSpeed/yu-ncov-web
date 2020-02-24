@@ -1,6 +1,5 @@
 import React from 'react';
-import { TFieldDisplay } from '../types'
-import { getTFieldValue } from '../helper/modelHelper'
+import { TFieldDisplay,getTFieldValue } from 'macoolka-model-core'
 import {isString} from 'macoolka-predicate'
 import Mdx from './Mdx'
 
@@ -21,6 +20,7 @@ const FieldDisplay: React.SFC<{ model: TFieldDisplay<any>, value: any }> = ({ mo
             return <Mdx value={formatMarkdown(fieldValue) as string}></Mdx>
         }
         default: {
+         
             return fieldValue as any;//isString(fieldValue)?<Element>{fieldValue}</Element>:fieldValue as any
         }
     }

@@ -26,7 +26,7 @@ export type RumorsQuery = (
 
 export const RumorsDocument = gql`
     query Rumors($skip: Int, $first: Int) {
-  rumors(first: $first, skip: $skip) @client {
+  rumors(first: $first, skip: $skip) {
     id
     title
     content

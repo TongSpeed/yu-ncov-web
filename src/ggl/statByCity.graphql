@@ -5,7 +5,7 @@ query statByCity(
    
     province:$province
     city:$city
-    ) @client {
+    )  {
     city {
       id
       title

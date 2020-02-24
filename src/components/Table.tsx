@@ -1,8 +1,7 @@
-import { TTable } from '../types'
+import { TTable,mediaTypes } from 'macoolka-model-core'
 import Hiddren, { HiddenProps } from '@material-ui/core/Hidden'
 import React from "react";
-import Table from "../dashboard/Table/ModelTable";
-import {mediaTypes} from '../helper/modelHelper'
+import Table from "./ModelTable";
 //import { getTFieldValue } from '../helper/modelHelper'
 const hiddenProps: HiddenProps[] = [{ only:['lg','sm','md','xl']  }, {  only:['xs','md','lg','xl'] }, 
 {  only:['xs','sm','lg',,'xl']  }, {  only:['xs','sm','md']  }]

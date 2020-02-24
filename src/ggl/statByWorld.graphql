@@ -1,5 +1,5 @@
 query worlds { 
-  worldRecords @client{
+  worldRecords {
     id
     deadCount,
     curedCount,

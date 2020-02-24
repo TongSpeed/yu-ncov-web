@@ -1,11 +1,9 @@
 import React from "react";
 import Chart from "../dashboard/Chart/Chart";
-import { TChart, TModel } from '../types'
-import { getField, getFields, getFieldValue } from '../helper/modelHelper'
 
+import { TChart, TModel,getField, getFields, getFieldValue } from 'macoolka-model-core'
 import Hiddren, { HiddenProps } from '@material-ui/core/Hidden'
-import { formatShortMonthDay } from '../helper/typeHelper'
-
+import {formatDate} from '../virus/i18n'
 const hiddenProps: HiddenProps[] = [{ only: ['lg', 'sm', 'md', 'xl'] }, { only: ['xs', 'md', 'lg', 'xl'] },
 { only: ['xs', 'sm', 'lg', , 'xl'] }, { only: ['xs', 'sm', 'md'] }]
 const fieldToChartData = (model: TModel) => ({ lableName, valueNames }: Pick<TChart<any>, 'lableName' | 'valueNames'>,
@@ -16,7 +14,7 @@ const fieldToChartData = (model: TModel) => ({ lableName, valueNames }: Pick<TCh
         const labels = as.map(value => {
             const _lableValue = getFieldValue(labelField)(value)
 
-            return (labelField.type === 'date' || labelField.type === 'datetime') ? formatShortMonthDay(_lableValue) : _lableValue
+            return (labelField.type === 'date' || labelField.type === 'datetime') ? formatDate('short')(_lableValue) : _lableValue
         })
         const seriesValue = seriesFields.map(seriesField => as.map(value => {
             const _value = getFieldValue(seriesField)(value)

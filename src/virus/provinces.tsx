@@ -1,11 +1,8 @@
 import { useStatByProvinceQuery, StatByProvinceQuery } from '../generated/hook/statByProvince.generated'
-import { TCard, TFormatField } from '../types'
-import { ProvinceVirusRecord, } from './types'
-import { getProvincesByLastDate,} from './helper'
+import { TCard, TFormatField } from 'macoolka-model-core'
+import { ProvinceVirusRecord, getProvincesByLastDate,ProvinceRecord} from 'yu-ncov-core'
 
-import { provinceTable,getProvinceLink } from './viewHelper'
-import { ProvinceRecord } from './model'
-import { formatDate } from '../helper/typeHelper'
+import { provinceTable,getProvinceLink ,fieldLastDate} from './viewHelper'
 import { pipe } from 'fp-ts/lib/pipeable'
 import Link from '../components/Link'
 export const provinces = (variable: any={}): TCard<ProvinceVirusRecord[]> => ({
@@ -26,12 +23,7 @@ export const provinces = (variable: any={}): TCard<ProvinceVirusRecord[]> => ({
             field: "各省疫情表",
         }]
     },
-    subTitle: {
-        items: [{
-            _type: 'field',
-            field: (date) => date.length > 0 ? formatDate(date[0].recordAt) : "疫情表",
-        }]
-    },
+    subTitle: fieldLastDate,
     grid: {
         xs: 12,
         sm: 12,

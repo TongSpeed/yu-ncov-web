@@ -1,5 +1,5 @@
 import React from 'react';
-import { TPage } from '../types'
+import { TPage } from 'macoolka-model-core'
 import GridContainer from "../dashboard/Grid/GridContainer";
 import Element from 'macoolka-ui-components/lib/Element'
 import {isFunction} from 'macoolka-predicate'

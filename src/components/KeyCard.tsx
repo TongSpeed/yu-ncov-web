@@ -6,8 +6,7 @@ import CardFooter from "../dashboard/Card/CardFooter";
 import useStyles from '../style'
 import Store from "@material-ui/icons/Store";
 import LocalOffer from "@material-ui/icons/LocalOffer";
-import { TKeyCard } from '../types'
-import { getTFieldValue } from '../helper/modelHelper'
+import { TKeyCard } from 'macoolka-model-core'
 const ModelCard: React.SFC<{ 
     value: any[],
      model: TKeyCard<any> ,

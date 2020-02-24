@@ -1,8 +1,7 @@
 {
-  
-    
-      "github": {
-        "enabled": true
-      }
-    
+  "version": 2,
+ 
+  "github": {
+    "enabled": true
   }
+}

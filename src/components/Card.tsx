@@ -4,10 +4,7 @@ import CardHeader from "../dashboard/Card/CardHeader";
 import CardBody from "../dashboard/Card/CardBody";
 import CardFooter from "../dashboard/Card/CardFooter";
 import useStyles from '../style'
-import Store from "@material-ui/icons/Store";
-import LocalOffer from "@material-ui/icons/LocalOffer";
-import { TCard } from '../types'
-import { getTFieldValue } from '../helper/modelHelper'
+import { TCard } from 'macoolka-model-core'
 
 import Element from 'macoolka-ui-components/lib/Element'
 const ModelCard: React.SFC<{

@@ -5,21 +5,17 @@ import { AppProvider } from '../src/app/AppContext'
 import appOption from '../data'
 
 import "perfect-scrollbar/css/perfect-scrollbar.css";
-import withApolloClient from '../src/virus/apollo/withApolloClient'
+import withApolloClient from '../src/apollo/withApolloClient'
  class MyApp extends App {
  
     render() {
         const { Component, pageProps } = this.props;
         return (  
-       
             <AppProvider data={appOption}>
                 <Root >
                     <Component {...pageProps} />
                 </Root>
             </AppProvider>
-           
-
-     
         );
     }
 }

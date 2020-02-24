@@ -5,7 +5,7 @@ query news(
   news(
     first:$first
     skip:$skip
-  ) @client {
+  )  {
     id
     title
   	content

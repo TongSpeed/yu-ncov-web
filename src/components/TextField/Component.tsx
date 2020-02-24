@@ -2,7 +2,7 @@ import React from 'react';
 import _TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import { useFormContext } from "react-hook-form";
 import SelectOptions from './SelectOptions'
-import { TTextField } from '../../types'
+import { TTextField } from 'macoolka-model-core'
 import DateFnsUtils from '@date-io/date-fns';
 import { fieldToProps, connetToFormContext } from './utils'
 import {
@@ -17,7 +17,7 @@ const DateTimeField: React.SFC<{
   const formContext = useFormContext()
   const { watch, setValue } = formContext
   connetToFormContext(formContext)(field)
-  const { field: { name, format = "yyyy年MM月dd日 hh:mm" }, textFieldType } = field;
+  const { field: { name}, textFieldType } = field;
   const value = watch(name)
   const handleDateChange = (date: any) => {
     setValue(name, date ? date.toISOString() : null)
@@ -30,7 +30,7 @@ const DateTimeField: React.SFC<{
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils} >
       <C
-        format={format}
+        format={"yyyy年MM月dd日 hh:mm"}
         value={value}
         onChange={handleDateChange}
         {...fieldToProps(field)}
@@ -48,10 +48,10 @@ const SelectField: React.SFC<{
   const formContext = useFormContext()
   const { watch, setValue } = formContext
   connetToFormContext(formContext)(field)
-  const { useQuery, queryName, variables } = query!
+  const { useQuery, queryName, variable } = query!
 
   const value = watch(name)
-  const { data } = useQuery!({ variables })
+  const { data } = useQuery!({ variable:variable })
 
   return (data ? <_TextField
     select

@@ -1,7 +1,6 @@
 import { useNewsQuery, NewsQuery,NewsQueryVariables } from '../generated/hook/news.generated'
-import { TRow,TCard } from '../types'
-import { NewsInput, } from './types'
-import { NewsModel } from './model'
+import { TRow,TCard } from 'macoolka-model-core'
+import { NewsInput, NewsModel} from 'yu-ncov-core'
 import newsCard from './newsCard'
 export const rumors = (variable: NewsQueryVariables): TRow<NewsInput[]> => ({
     _type: 'row',

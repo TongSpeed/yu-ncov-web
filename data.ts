@@ -31,7 +31,7 @@ const appData: AppOption = {
         name: 'Macoolka',
         logo:'/static/logo.png',
         email:"macoolka@gmail.com",
-        author:"版权所有:加速工作室@2020",
+        author:"版权所有: 加速工作室@2020",
         href:"/",
     },
     style: {

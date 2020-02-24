@@ -1,17 +1,13 @@
 
-import { useStatByProvinceQuery,StatByProvinceQuery } from '../generated/hook/statByProvince.generated'
+import { useStatByProvinceQuery } from '../generated/hook/statByProvince.generated'
 
-import {TPage,TLinkData} from '../types'
+import {TPage,TLinkData} from 'macoolka-model-core'
 import {getWorldLink,getCountryLink,getProvinceLink ,getLastRecordAtString} from './viewHelper'
-import { formatDate } from '../helper/typeHelper'
-import { ProvinceRecord } from './model'
+import { ProvinceRecord,ProvinceVirusRecord,VRecordNorm } from 'yu-ncov-core'
 import { template } from './common'
-import {ProvinceVirusRecord,VRecordNorm} from './types'
 import * as A from 'fp-ts/lib/Array'
 import { pipe } from 'fp-ts/lib/pipeable'
 import * as O from 'fp-ts/lib/Option'
-
-import { today5Day } from '../helper/typeHelper'
 import cities from './cities'
 export const province=(variable:any):TPage<Array<ProvinceVirusRecord&VRecordNorm>>=>({
     _type:'page',

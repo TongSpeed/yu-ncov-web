@@ -26,7 +26,7 @@ export type NewsQuery = (
 
 export const NewsDocument = gql`
     query news($skip: Int, $first: Int) {
-  news(first: $first, skip: $skip) @client {
+  news(first: $first, skip: $skip) {
     id
     title
     content

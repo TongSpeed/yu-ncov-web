@@ -1,13 +1,11 @@
 import { useStatByCityQuery, StatByCityQuery } from '../generated/hook/statByCity.generated'
-import { TCard, TFormatField } from '../types'
-import { CityVirusRecord } from './types'
-import { CityRecord } from './model'
-import { formatDate } from '../helper/typeHelper'
+import { TCard, TFormatField } from 'macoolka-model-core'
+import { CityVirusRecord,CityRecord ,getCityByLastDate} from 'yu-ncov-core'
+
 import { pipe } from 'fp-ts/lib/pipeable'
 import Link from '../components/Link'
-import { getCityByLastDate } from './helper'
-
-import { cityTable,getCityLink } from './viewHelper'
+import {formatDate} from './i18n'
+import { cityTable,getCityLink ,fieldLastDate} from './viewHelper'
 export const cities = (variable: any={}): TCard<CityVirusRecord[]> => ({
     _type: 'card',
     model: CityRecord,
@@ -27,12 +25,7 @@ export const cities = (variable: any={}): TCard<CityVirusRecord[]> => ({
             field:  "城市疫情表",
         }]
     },  
-    subTitle:{
-        items:[{
-            _type:'field',
-            field:   (date) => date.length > 0 ? formatDate(date[0].recordAt) : "疫情表",
-        }]
-    }, 
+    subTitle:fieldLastDate, 
     grid: {
         xs: 12,
         sm: 12,

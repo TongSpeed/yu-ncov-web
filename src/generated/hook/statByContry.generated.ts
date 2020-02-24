@@ -29,7 +29,7 @@ export type StatByCountryQuery = (
 
 export const StatByCountryDocument = gql`
     query statByCountry($country: String) {
-  countryRecords(country: $country) @client {
+  countryRecords(country: $country) {
     country {
       id
       title

@@ -1,22 +1,18 @@
-import { defaultValue, ordRecordAt } from './helper'
-import { standChinaTable, standTable ,keys,keysAdd,keysAddRate} from './viewHelper'
+import { standChinaTable, standTable ,keys,keysAdd,keysAddRate,fieldLastDate} from './viewHelper'
 import Accessibility from "@material-ui/icons/Accessibility";
 import * as A from 'fp-ts/lib/Array'
 import { pipe } from 'fp-ts/lib/pipeable'
 import * as O from 'fp-ts/lib/Option'
-import { BasicRecord } from './model'
+import { BasicRecord ,defaultValue, ordRecordAt} from 'yu-ncov-core'
 import {notMaybe} from 'macoolka-predicate'
-import { getField } from '../helper/modelHelper'
-import { TKeyCard, TChart, TCard, TModel, ColorEnum, TNode } from '../types'
-import { formatDateTime } from '../helper/typeHelper'
-
+import { getField ,TKeyCard, TChart, TCard, TModel,  TNode} from 'macoolka-model-core'
 export const keyCard = ( model: TModel)=>(name: string): TKeyCard<any> => ({
     _type: 'keycard',
     grid: {
         xs: 12,
         sm: 6,
         md: 3,
-        lg:2
+        lg:3
     },
     HeadIcon: Accessibility,
     title: {
@@ -197,12 +193,7 @@ export const template = (type: 'country' | 'province' | 'city' | 'world', model:
         as = getData ? getData(as) : as
         return as
     },
-    subTitle: {
-        items: [{
-            _type: 'field',
-            field: (data) => data.length > 0 ? formatDateTime()(data[data.length - 1].recordAt) : "",
-        }]
-    },
+    subTitle: fieldLastDate,
     divider: 'down',
     grid: {
         xs: 12,

@@ -1,7 +1,5 @@
 import React from "react";
-import Chart from "../dashboard/Chart/Chart";
-import { TContainer, TModel } from '../types'
-import { getField, getFields, getFieldValue } from '../helper/modelHelper'
+import { TContainer } from 'macoolka-model-core'
 
 import Element from 'macoolka-ui-components/lib/Element'
 import GridContainer from "../dashboard/Grid/GridContainer";

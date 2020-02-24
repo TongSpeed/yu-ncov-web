@@ -1,12 +1,11 @@
 
 import { useStatByCityQuery, StatByCityQuery } from '../generated/hook/statByCity.generated'
-import { TPage, TLinkData, } from '../types'
+import { TPage, TLinkData, } from 'macoolka-model-core'
 import { getCountryLink, getProvinceLink, getCityLink, getWorldLink, getLastRecordAtString} from './viewHelper'
 import * as A from 'fp-ts/lib/Array'
 import { pipe } from 'fp-ts/lib/pipeable'
 import * as O from 'fp-ts/lib/Option'
-import { CityVirusRecord ,VRecordNorm} from './types'
-import { CityRecord } from './model'
+import { CityVirusRecord ,VRecordNorm,CityRecord} from 'yu-ncov-core'
 import { template } from './common'
 export const city = (variable: any): TPage<Array<CityVirusRecord&VRecordNorm>> => ({
     _type: 'page',

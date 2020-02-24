@@ -23,7 +23,7 @@ export type WorldsQuery = (
 
 export const WorldsDocument = gql`
     query worlds {
-  worldRecords @client {
+  worldRecords {
     id
     deadCount
     curedCount

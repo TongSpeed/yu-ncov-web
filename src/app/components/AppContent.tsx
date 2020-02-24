@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
       mkMedia: [{
         // mkContentWidth: 'small',
         mkWidth: 'full',
-        mkPaddingH: 'large',
+        mkPaddingH: 'small',
       }, {
         mkWidth: 'app_medium',
 

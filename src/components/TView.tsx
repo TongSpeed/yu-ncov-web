@@ -1,5 +1,5 @@
 import React from 'react';
-import { TNode, Grid } from '../types'
+import { TNode, Grid } from 'macoolka-model-core'
 import GridContainer from "../dashboard/Grid/GridContainer";
 import GridItem from "../dashboard/Grid/GridItem";
 import { isArray } from 'macoolka-predicate'
@@ -17,9 +17,10 @@ const toChildModel = (parent: TNode<any>) => (child: TNode<any>): TNode<any> => 
     model: parent.model,
     ...child,
 })
-const ModelView: React.SFC<{ model: TNode<any>, value?: any }> =
+const ModelView: React.SFC<{ model: any, value?: any }> =
     ({ model, value }) => {
-        const { transform } = model
+        const { transform } = model 
+        let i=0;
         const toGrid = ({ grid }: Grid) => (a: React.ReactElement): React.ReactElement => grid ? (<GridItem {...grid}>{a}</GridItem>) : a
         const toItems = (v: any) => (param?: { items: TNode<any>[] | TNode<any>, isList?: boolean }): React.ReactNode => {
             if (param) {
@@ -77,17 +78,17 @@ const ModelView: React.SFC<{ model: TNode<any>, value?: any }> =
                     </Card>
                     break;
                 case 'chart':
-                    R = <Chart model={model} value={a}> </Chart>
+                    R = <Chart  key={++i} model={model} value={a}> </Chart>
                     break;
                 case 'table':
-                    R = <Table model={model} value={a}> </Table>
+                    R = <Table  key={++i}  model={model} value={a}> </Table>
                     break;
 
                 case 'field':
-                    R = <FieldDisplay model={model} value={a}> </FieldDisplay>
+                    R = <FieldDisplay key={++i} model={model} value={a}> </FieldDisplay>
                     break;
                 case 'link':
-                        R = <Link as={model.as} href={model.href}>{model.title} </Link>
+                        R = <Link  key={++i} as={model.as} href={model.href}>{model.title} </Link>
                         break;
                 default:
                     R = <GridContainer> </GridContainer>
